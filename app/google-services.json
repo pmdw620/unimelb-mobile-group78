@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "205949889691",
+    "firebase_url": "https://unimelb-mobile-group78.firebaseio.com",
+    "project_id": "unimelb-mobile-group78",
+    "storage_bucket": "unimelb-mobile-group78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205949889691:android:f26de9494faee823946a3e",
+        "android_client_info": {
+          "package_name": "com.unimelb.ienv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205949889691-a4fdl9a4pmoetjcrd332r4oqh299h75v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1RCL4SR7Vb74l-HOvwBZK56jPYH8HKC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205949889691-a4fdl9a4pmoetjcrd332r4oqh299h75v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
