@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.regiBtn:{
-                Intent intent = new Intent(this, registerActivity.class);
+                Intent intent = new Intent(this, RegisterActivity.class);
                 this.startActivity(intent);
                 break;
             }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void updateUI(FirebaseUser user){
         if(user!=null){
-            Intent intent = new Intent(this, dashboardActivity.class);
+            Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
         }
     }
