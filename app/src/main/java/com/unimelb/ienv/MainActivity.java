@@ -3,13 +3,22 @@ package com.unimelb.ienv;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +28,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button regiBtn;
     private Button loginBtn;
     private Button forgotBtn;
@@ -27,43 +39,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText loginPwd;
     public static FirebaseAuth mAuth;
     public static FirebaseUser currentUser;
+    List<Fragment> mFragments;
+    private int lastIndex;
+    private BindService bindService;
+    private TextView textView;
+    private boolean isBind;
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment = null;
-        switch (menuItem.getItemId()){
-            case R.id.navigation_profile:
-                fragment = new ProfileFragment();
-                break;
-
-            case R.id.navigation_task:
-                fragment = new TaskFragment();
-                break;
-
-            case R.id.navigation_leadingboard:
-                fragment = new LeadingBoardFragment();
-                break;
-
-            case R.id.navigation_home:
-                fragment = new HomeFragment();
-                break;
-        }
-
-        return loadFragment(fragment);
-    }
-
-    private boolean loadFragment(Fragment fragment){
-        if(fragment!=null){
-
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
-
-            return true;
-        }
-        return false;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,17 +101,122 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+    public void initData() {
+        mFragments = new ArrayList<>();
+        mFragments.add(new HomeFragment());
+        mFragments.add(new TaskFragment());
+        mFragments.add(new LeadingBoardFragment());
+        mFragments.add(new ProfileFragment());
+        // 初始化展示MessageFragment
+        setFragmentPosition(0);
+    }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Log.d("123", "onNavigationItemSelected is click: ");
+            switch (item.getItemId()) {
+
+                case R.id.navigation_home:
+                    Log.d("dashboard", "R.id.navigation_home: ");
+                    setFragmentPosition(0);
+                    break;
+                case R.id.navigation_task:
+                    Log.d("dashboard", "R.id.navigation_dashboard: ");
+                    setFragmentPosition(1);
+                    break;
+                case R.id.navigation_leadingboard:
+                    Log.d("dashboard", "R.id.leading_board: ");
+                    setFragmentPosition(2);
+                    break;
+                case R.id.navigation_profile:
+                    Log.d("dashboard", "R.id.navigation_me: ");
+                    setFragmentPosition(3);
+                    break;
+            }
+            Log.d("dashboard", "xxxxx ");
+            return true;
+        }
+    };
+    private void setFragmentPosition(int position) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment currentFragment = mFragments.get(position);
+        Fragment lastFragment = mFragments.get(lastIndex);
+        lastIndex = position;
+        ft.hide(lastFragment);
+        if (!currentFragment.isAdded()) {
+            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+            ft.add(R.id.fragment_container, currentFragment);
+        }
+        ft.show(currentFragment);
+        ft.commitAllowingStateLoss();
+    }
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            if (msg.what == 1) {
+                textView.setText(msg.arg1 + "");
+            }
+            TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
+            if(a!=null){
+                a.setText(msg.arg1 + "");
+            }
+            else{
+                Log.d("handler", "TextView a is null");
+            }
+            return false;
+        }
+    });
     public void updateUI(FirebaseUser user){
         if(user!=null){
             setContentView(R.layout.activity_dashboard);
             BottomNavigationView navView = findViewById(R.id.nav_view);
 
             // set default to home fragment
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment())
-                    .commit();
-            navView.setOnNavigationItemSelectedListener(this);
+            navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+            initData();
+            textView = (TextView) findViewById(R.id.busu);
+            Intent intent = new Intent(MainActivity.this, BindService.class);
+            isBind =  bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+            startService(intent); //绷定并且开启一个服务，绷定是为了方便数据交换，启动是为了当当前app不在活动页的时候，计步服务不会被关闭。需要保证当activity不为活跃状态是计步服务在后台能一直运行！
+
+        }
+    }
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            BindService.LcBinder lcBinder = (BindService.LcBinder) service;
+            bindService = lcBinder.getService();
+            bindService.registerCallback(new UpdateUiCallBack() {
+                @Override
+                public void updateUi(int stepCount) {
+                    //当前接收到stepCount数据，就是最新的步数
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    message.arg1 = stepCount;
+                    handler.sendMessage(message);
+                    Log.i("dashboard—updateUi","当前步数"+stepCount);
+                }
+            });
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+    @Override
+    public void onDestroy() {  //app被关闭之前，service先解除绑定，如果不解除绑定下次Activity切换到活动界面的时候又会重新开启一个新的计步线程。
+        super.onDestroy();
+        if (isBind) {
+            this.unbindService(serviceConnection);
         }
     }
 }
