@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class forgotPwdAcitivity extends AppCompatActivity {
+public class ForgotPwdActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText forgotPageEmail;
     private Button emailVeriBtn;

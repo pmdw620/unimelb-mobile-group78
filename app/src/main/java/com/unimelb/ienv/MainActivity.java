@@ -2,9 +2,11 @@ package com.unimelb.ienv;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,18 +14,56 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
     private Button regiBtn;
     private Button loginBtn;
     private Button forgotBtn;
     private EditText loginEmail;
     private EditText loginPwd;
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
+    public static FirebaseAuth mAuth;
+    public static FirebaseUser currentUser;
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Fragment fragment = null;
+        switch (menuItem.getItemId()){
+            case R.id.navigation_profile:
+                fragment = new ProfileFragment();
+                break;
+
+            case R.id.navigation_task:
+                fragment = new TaskFragment();
+                break;
+
+            case R.id.navigation_leadingboard:
+                fragment = new LeadingBoardFragment();
+                break;
+
+            case R.id.navigation_home:
+                fragment = new HomeFragment();
+                break;
+        }
+
+        return loadFragment(fragment);
+    }
+
+    private boolean loadFragment(Fragment fragment){
+        if(fragment!=null){
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+
+            return true;
+        }
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         regiBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         forgotBtn.setOnClickListener(this);
+
+        // check if user is logged in or not
+        updateUI(currentUser);
     }
 
     @Override
@@ -70,17 +113,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.forgotBtn:{
                 // perform find lost password function
-                Intent intent = new Intent(this, forgotPwdAcitivity.class);
+                Intent intent = new Intent(this, ForgotPwdActivity.class);
                 startActivity(intent);
                 break;
             }
         }
     }
 
-    private void updateUI(FirebaseUser user){
+    public void updateUI(FirebaseUser user){
         if(user!=null){
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
+            setContentView(R.layout.activity_dashboard);
+            BottomNavigationView navView = findViewById(R.id.nav_view);
+
+            // set default to home fragment
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment())
+                    .commit();
+            navView.setOnNavigationItemSelectedListener(this);
         }
     }
 }
