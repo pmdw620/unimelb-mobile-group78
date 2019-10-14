@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +34,8 @@ public class ProfileFragment extends Fragment {
 
         logoutBtn.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v){
-                MainActivity.mAuth.signOut();
-                getActivity().setContentView(R.layout.activity_main);
+               MainActivity.mAuth.signOut();
+               getActivity().setContentView(R.layout.activity_main);
            }
         });
     }
