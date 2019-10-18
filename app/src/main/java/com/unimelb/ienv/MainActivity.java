@@ -28,6 +28,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ValueEventListener;
+//
+//import java.util.HashMap;
+//import java.util.Map;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +48,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText loginPwd;
     public static FirebaseAuth mAuth;
     public static FirebaseUser currentUser;
+//    private DatabaseReference mDatabase;
+
     List<Fragment> mFragments;
     private int lastIndex;
+
     private BindService bindService;
     private TextView textView;
     private boolean isBind;
-
+    private int steptaskcount = 0;
+    private NumberProgressBar bnp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     currentUser = mAuth.getCurrentUser();
+//                                    mDatabase = FirebaseDatabase.getInstance().getReference();
                                     Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_LONG).show();
                                     updateUI(currentUser);
                                 } else{
@@ -152,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         ft.show(currentFragment);
         ft.commitAllowingStateLoss();
+
     }
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -160,8 +175,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText(msg.arg1 + "");
             }
             TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
+            bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
+            TextView b = (TextView)mFragments.get(1).getView().findViewById(R.id.currentscore);
+            if(msg.arg1 > 30 && steptaskcount == 0 ) {
+                Log.d("handler","Complete task of running");
+                steptaskcount = 1 ;
+                String uid = currentUser.getUid();
+                int current = Integer.parseInt((b.getText().toString()))+1;
+                Log.d("handler","set b as"+current);
+                b.setText(current + "");
+            }
+
+//            if(b!=null)
+//            {
+//
+//                Log.d("handler","current"+Integer.parseInt((b.getText().toString()))+1);
+//            }
             if(a!=null){
                 a.setText(msg.arg1 + "");
+                int res = msg.arg1;
+                if (res<100){
+                    bnp.setProgress(res);
+
+                }
+                else {
+                    bnp.setProgress(100);
+                }
             }
             else{
                 Log.d("handler", "TextView a is null");

@@ -14,14 +14,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/bushu"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
+
         android:text="0"
         android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pb_update_progress"
         tools:layout_constraintLeft_toLeftOf="parent"
-
         tools:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/currentscore"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintTop_toTopOf="parent" />
+
+    <com.unimelb.ienv.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pb_update_progress"
+        style="@style/NumberProgressBar_Passing_Green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:padding="20dp"
+        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintTop_toBottomOf="@+id/textView3"
+        custom:progress_current="0">
+
+    </com.unimelb.ienv.NumberProgressBar>
 </androidx.constraintlayout.widget.ConstraintLayout>
