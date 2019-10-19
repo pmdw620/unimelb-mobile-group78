@@ -118,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             }
+            case R.id.button_scan:{
+                Intent intent = new Intent(this, GoToScan.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 
