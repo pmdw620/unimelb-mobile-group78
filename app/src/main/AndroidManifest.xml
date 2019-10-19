@@ -25,7 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GoToScan"></activity>
+        <activity android:name=".GoToScan_dining"></activity>
+        <activity android:name=".GoToScan_rubbish"></activity>
         <activity
             android:name=".zxing.android.CaptureActivity"
             android:screenOrientation="portrait"

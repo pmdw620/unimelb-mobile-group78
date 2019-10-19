@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.unimelb.ienv.zxing.android.CaptureActivity;
 
-public class GoToScan extends AppCompatActivity {
+public class GoToScan_dining extends AppCompatActivity {
     private static final String DECODED_CONTENT_KEY = "codedContent";
     private static final String DECODED_BITMAP_KEY = "codedBitmap";
     private static final int REQUEST_CODE_SCAN = 0x0000;
@@ -30,7 +30,7 @@ public class GoToScan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_go_to_scan);
+        setContentView(R.layout.activity_go_to_scan_dining);
         tv_scanResult = (TextView) findViewById(R.id.tv_scanResult);
         btn_scan = (Button) findViewById(R.id.btn_scan);
     }
