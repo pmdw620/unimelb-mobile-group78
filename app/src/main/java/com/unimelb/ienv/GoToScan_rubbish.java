@@ -1,5 +1,9 @@
 package com.unimelb.ienv;
-
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +15,21 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-//import android.support.v4.content.ContextCompat;
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.unimelb.ienv.zxing.android.CaptureActivity;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.firebase.firestore.*;
+import com.google.android.gms.tasks.*;
+import com.google.android.gms.tasks.OnCompleteListener;
+
 
 public class GoToScan_rubbish extends AppCompatActivity {
     private static final String DECODED_CONTENT_KEY = "codedContent";
@@ -27,12 +38,20 @@ public class GoToScan_rubbish extends AppCompatActivity {
 
     private Button btn_scan;
     private TextView tv_scanResult;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth;
+    SQLiteDatabase sqlDatabase;
+    Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_to_scan_rubbish);
         tv_scanResult = (TextView) findViewById(R.id.tv_scanResult);
         btn_scan = (Button) findViewById(R.id.btn_scan);
+
+
+
+
     }
     public void onClick(View v) {
         switch (v.getId()) {
@@ -43,6 +62,7 @@ public class GoToScan_rubbish extends AppCompatActivity {
                 } else {
                     goScan();
                 }
+
                 break;
             default:
                 break;
@@ -80,6 +100,26 @@ public class GoToScan_rubbish extends AppCompatActivity {
             if (data != null) {
                 //返回的文本内容
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
+                if (content == "complete"){
+                    String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    TaskDBModel task = new TaskDBModel();
+                    task.setRubbish(1);
+                    int id1 = 1;
+                    db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id1)});
+                    Cursor cursor = db.rawQuery("select * from TaskCompleter ",
+                            null);
+                    while (cursor.moveToNext()) {
+                        String id = cursor.getString(0);
+                        String rubbish = cursor.getString(1);
+                        String dining = cursor.getString(2);
+                        String walk = cursor.getString(3);
+                        String quiz = cursor.getString(4);
+                        System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
+                    }
+                }
+
                 //返回的BitMap图像
                 Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
 
