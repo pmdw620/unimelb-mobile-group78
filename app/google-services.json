@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "205949889691-g6ukmu4hcp0fhtsp0gc7hap0sj7ji5mg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unimelb.ienv",
+            "certificate_hash": "cd903cdc760984d50e69c15b35390f99a4368f03"
+          }
+        },
+        {
+          "client_id": "205949889691-npmog045lo9adbs8ag435bv89rlqib8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unimelb.ienv",
+            "certificate_hash": "bcc571e412f10e83460dfaa9a9f50faeee3970df"
+          }
+        },
+        {
           "client_id": "205949889691-a4fdl9a4pmoetjcrd332r4oqh299h75v.apps.googleusercontent.com",
           "client_type": 3
         }
