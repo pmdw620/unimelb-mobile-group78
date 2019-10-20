@@ -118,13 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             }
-            case R.id.button_rubbish:{
-                Intent intent = new Intent(this, GoToScan_rubbish.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.button_dining:{
-                Intent intent = new Intent(this, GoToScan_dining.class);
+            case R.id.buttonQuiz:{
+                Intent intent = new Intent(this, GoToScan.class);
                 startActivity(intent);
                 break;
             }
