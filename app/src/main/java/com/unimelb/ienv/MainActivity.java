@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.unimelb.view.HorizontalProgressbarWithProgress;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
     private Button regiBtn;
@@ -138,16 +134,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             }
-//            case R.id.button_rubbish:{
-//                Intent intent = new Intent(this, GoToScan_rubbish.class);
-//                startActivity(intent);
-//                break;
-//            }
-//            case R.id.button_dining:{
+            case R.id.dining_go:{
+                Intent intent = new Intent(this, GoToScan_rubbish.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.rubbish_go:{
+                Intent intent = new Intent(this, GoToScan_dining.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.quiz_go:{
 //                Intent intent = new Intent(this, GoToScan_dining.class);
 //                startActivity(intent);
-//                break;
-//            }
+                break;
+            }
 
         }
     }
