@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.unimelb.view.HorizontalProgressbarWithProgress;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
     private Button regiBtn;
@@ -30,6 +32,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static FirebaseAuth mAuth;
     public static FirebaseUser currentUser;
 
+//    private HorizontalProgressbarWithProgress mHProgress;
+//    public static final int MSG_UPDATE = 0X110;
+//    private Handler mHandler = new Handler(){
+//        public void handleMessage(android.os.Message msg){
+//            int progress = mHProgress.getProgress();
+//            mHProgress.setProgress(++progress);
+//            if(progress>=100){
+//                mHandler.removeMessages(MSG_UPDATE);
+//            }
+//            mHandler.sendEmptyMessageDelayed(MSG_UPDATE,100);
+//        };
+//    };
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment fragment = null;
@@ -87,6 +101,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // check if user is logged in or not
         updateUI(currentUser);
+
+//        //obtain steps progress bar
+//        mHProgress = findViewById(R.id.stepProgressBar);
+//        mHandler.sendEmptyMessage(MSG_UPDATE);
     }
 
     @Override
@@ -120,16 +138,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             }
-            case R.id.button_rubbish:{
-                Intent intent = new Intent(this, GoToScan_rubbish.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.button_dining:{
-                Intent intent = new Intent(this, GoToScan_dining.class);
-                startActivity(intent);
-                break;
-            }
+//            case R.id.button_rubbish:{
+//                Intent intent = new Intent(this, GoToScan_rubbish.class);
+//                startActivity(intent);
+//                break;
+//            }
+//            case R.id.button_dining:{
+//                Intent intent = new Intent(this, GoToScan_dining.class);
+//                startActivity(intent);
+//                break;
+//            }
 
         }
     }
