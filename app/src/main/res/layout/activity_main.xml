@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".MainActivity">
-
     <Button
         android:id="@+id/regiBtn"
         android:layout_width="315dp"

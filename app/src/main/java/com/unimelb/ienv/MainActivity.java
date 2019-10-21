@@ -3,6 +3,7 @@ package com.unimelb.ienv;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TaskDBModel task = new TaskDBModel();
     private int initstepcount =0;
 
+    private NumberProgressBar bnp;
+    private Intromanager intromanager;
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment fragment = null;
@@ -92,6 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        intromanager = new Intromanager(this);
+//        Log.i("init-intro",""+intromanager.check());
+//        if (!intromanager.check()){
+//            intromanager.setFirst(false);
+//            Intent i = new Intent(MainActivity.this,Main2Activity.class);
+//            startActivity(i);
+//            finish();
+//        }
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
@@ -213,6 +225,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 task.setRubbish(rubbish);
                 sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
+
+                if ((res)<10000){
+
+                    bnp.setProgress(res/100);
+
+                }
+                else {
+                    bnp.setProgress(100);
+                }
             }
             return false;
         }
