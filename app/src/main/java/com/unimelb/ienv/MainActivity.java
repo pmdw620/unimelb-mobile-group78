@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BindService bindService;
     private TextView textView;
     private boolean isBind;
+    SQLiteDatabase sqlDatabase;
+    TaskDBModel task = new TaskDBModel();
+    private int initstepcount =0;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -156,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(user!=null){
             setContentView(R.layout.activity_dashboard);
             textView = (TextView) findViewById(R.id.busu);
+            textView.setVisibility(View.INVISIBLE);
             BottomNavigationView navView = findViewById(R.id.nav_view);
 
             // set default to home fragment
@@ -163,7 +168,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .replace(R.id.fragment_container, new HomeFragment())
                     .commit();
             navView.setOnNavigationItemSelectedListener(this);
-
+            SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
+            sqlDatabase = dbHelper.getWritableDatabase();
+            Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
+                    null);
+            int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
+            while (cursor.moveToNext()) {
+                id = Integer.parseInt(cursor.getString(0));
+                rubbish = Integer.parseInt(cursor.getString(1));
+                dining = Integer.parseInt(cursor.getString(2));
+                walk = Integer.parseInt(cursor.getString(3));
+                quiz = Integer.parseInt(cursor.getString(4));
+            }
+            textView.setText(walk + "");
+            Log.i("dashboard—init","当前步数"+walk);
+            this.initstepcount= walk;
 
             Intent intent = new Intent(MainActivity.this, BindService.class);
             isBind =  bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
@@ -175,7 +194,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
-                textView.setText(msg.arg1 + "");
+                int res= msg.arg1+initstepcount;
+                textView.setText(res + "");
+                Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
+                        null);
+                int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
+                while (cursor.moveToNext()) {
+                    id = Integer.parseInt(cursor.getString(0));
+                    rubbish = Integer.parseInt(cursor.getString(1));
+                    dining = Integer.parseInt(cursor.getString(2));
+                    walk = Integer.parseInt(cursor.getString(3));
+                    quiz = Integer.parseInt(cursor.getString(4));
+                }
+                task.setDining(dining);
+                task.setQuiz(quiz);
+                task.setWalk(res);
+                task.setRubbish(rubbish);
+                sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
+                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
             }
             return false;
         }

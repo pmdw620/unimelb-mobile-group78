@@ -35,7 +35,9 @@ public class ProfileFragment extends Fragment {
         logoutBtn.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v){
                MainActivity.mAuth.signOut();
-               getActivity().setContentView(R.layout.activity_main);
+               Intent i = new Intent(getActivity(),MainActivity.class);
+               startActivity(i);
+               getActivity().finish();
            }
         });
     }
