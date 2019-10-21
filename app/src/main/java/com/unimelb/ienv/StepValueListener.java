@@ -1,5 +1,5 @@
 package com.unimelb.ienv;
 
-public interface StepValuePassListener {
+public interface StepValueListener {
     void stepChanged(int steps);
 }

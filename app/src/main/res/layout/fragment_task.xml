@@ -77,15 +77,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/group" />
 
-    <com.unimelb.ienv.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/pb_update_progress"
-        style="@style/NumberProgressBar_Passing_Green"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:padding="20dp"
-        custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintStart_toStartOf="parent"
-        custom:layout_constraintTop_toBottomOf="@+id/stepcountbackground"
-        custom:progress_current="0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
