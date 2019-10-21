@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TaskDBModel task = new TaskDBModel();
     private int initstepcount =0;
 
-    private NumberProgressBar bnp;
+//    private NumberProgressBar bnp;
+//    private Intromanager intromanager;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,25 +59,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.navigation_profile:
                 fragment = new ProfileFragment();
                 textView.setVisibility(View.INVISIBLE);
-                bnp.setVisibility(View.INVISIBLE);
                 break;
 
             case R.id.navigation_task:
                 fragment = new TaskFragment();
                 textView.setVisibility(View.VISIBLE);
-                bnp.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.navigation_leadingboard:
                 fragment = new LeadingBoardFragment();
                 textView.setVisibility(View.INVISIBLE);
-                bnp.setVisibility(View.INVISIBLE);
                 break;
 
             case R.id.navigation_home:
                 fragment = new HomeFragment();
                 textView.setVisibility(View.INVISIBLE);
-                bnp.setVisibility(View.INVISIBLE);
                 break;
         }
 
@@ -99,7 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+//        intromanager = new Intromanager(this);
+//        Log.i("init-intro",""+intromanager.check());
+//        if (!intromanager.check()){
+//            intromanager.setFirst(false);
+//            Intent i = new Intent(MainActivity.this,Main2Activity.class);
+//            startActivity(i);
+//            finish();
+//        }
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
@@ -169,7 +173,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(user!=null){
             setContentView(R.layout.activity_dashboard);
             textView = (TextView) findViewById(R.id.busu);
-            bnp = (NumberProgressBar)findViewById(R.id.pb_update_progress);
             textView.setVisibility(View.INVISIBLE);
             BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -191,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 quiz = Integer.parseInt(cursor.getString(4));
             }
             textView.setText(walk + "");
-            bnp.setProgress(walk/100);
             Log.i("dashboard—init","当前步数"+walk);
             this.initstepcount= walk;
 
@@ -222,15 +224,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 task.setWalk(res);
                 task.setRubbish(rubbish);
                 sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);
-                if (100<(res) && res <10000){
-                    res= res/100;
-                    bnp.setProgress(res);
+                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
 
-                }
-                else {
-                    bnp.setProgress(100);
-                }
+//                if ((res)<10000){
+//
+//                    bnp.setProgress(res/100);
+//
+//                }
+//                else {
+//                    bnp.setProgress(100);
+//                }
             }
             return false;
         }
