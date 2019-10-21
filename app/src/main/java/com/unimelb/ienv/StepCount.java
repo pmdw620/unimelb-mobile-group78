@@ -1,16 +1,25 @@
 package com.unimelb.ienv;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class StepCount implements StepCountListener {
+import java.io.File;
+
+
+public class StepCount  implements StepCountListener {
     private int mCount; //当前步数
     private int count;  //缓存步数，步数3秒内小于10步则不计数
     private long timeOfLastPeak = 0;//计时  开始时间 步数3秒内小于10步则不计数
     private long timeOfThisPeak = 0;//计时  现在时间 步数3秒内小于10步则不计数
     private StepValuePassListener stepValuePassListener;//接口用来传递步数变化
     private StepDetector stepDetector;//传感器SensorEventListener子类实例
-// TODO: 使用SQLite 记录当天的步数以及是否完成任务
+
+
     public StepCount() {
         stepDetector = new StepDetector();
         stepDetector.initListener(this);
