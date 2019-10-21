@@ -17,6 +17,9 @@
         android:background="#A8E48F"
         android:text="Register now"
         android:textColor="#FFFFFF"
+        android:textIsSelectable="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -41,13 +44,12 @@
         android:layout_width="315dp"
         android:layout_height="0dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="48dp"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:inputType="text|textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="text|textEmailAddress" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -61,6 +63,8 @@
         android:background="#A8E48F"
         android:text="LOGIN WITH EMAIL"
         android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPwd" />
@@ -100,6 +104,8 @@
         android:background="#95d0b1"
         android:text="Forgot your password?"
         android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
