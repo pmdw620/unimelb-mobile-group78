@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TaskDBModel task = new TaskDBModel();
     private int initstepcount =0;
 
-    private NumberProgressBar bnp;
-    private Intromanager intromanager;
+//    private NumberProgressBar bnp;
+//    private Intromanager intromanager;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -226,14 +226,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
 
-                if ((res)<10000){
-
-                    bnp.setProgress(res/100);
-
-                }
-                else {
-                    bnp.setProgress(100);
-                }
+//                if ((res)<10000){
+//
+//                    bnp.setProgress(res/100);
+//
+//                }
+//                else {
+//                    bnp.setProgress(100);
+//                }
             }
             return false;
         }

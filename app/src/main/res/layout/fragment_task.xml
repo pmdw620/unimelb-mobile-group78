@@ -64,28 +64,28 @@
     <!--my:progress_text_color="#2F4F4F"-->
     <!--my:progress_text_size="20sp"-->
     <!--my:progress_unreach_color="#40E0D0" />-->
-    <ImageView
-        android:id="@+id/stepcountbackground"
-        android:layout_width="300dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/group" />
+<!--    <ImageView-->
+<!--        android:id="@+id/stepcountbackground"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="140dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="80dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.496"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:srcCompat="@drawable/group" />-->
 
-    <com.unimelb.ienv.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/pb_update_progress"
-        style="@style/NumberProgressBar_Passing_Green"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:padding="20dp"
-        custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintStart_toStartOf="parent"
-        custom:layout_constraintTop_toBottomOf="@+id/stepcountbackground"
-        custom:progress_current="0" />
+<!--    <com.unimelb.ienv.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"-->
+<!--        android:id="@+id/pb_update_progress"-->
+<!--        style="@style/NumberProgressBar_Passing_Green"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:padding="20dp"-->
+<!--        custom:layout_constraintEnd_toEndOf="parent"-->
+<!--        custom:layout_constraintStart_toStartOf="parent"-->
+<!--        custom:layout_constraintTop_toBottomOf="@+id/stepcountbackground"-->
+<!--        custom:progress_current="0" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
