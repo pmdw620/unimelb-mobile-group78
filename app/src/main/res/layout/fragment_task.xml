@@ -50,19 +50,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_rubbish" />
 
-    <!--<com.unimelb.view.HorizontalProgressbarWithProgress-->
-        <!--android:id="@+id/stepProgressBar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="464dp"-->
-        <!--android:progress="50"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--my:progress_reach_color="#7CFC00"-->
-        <!--my:progress_text_color="#2F4F4F"-->
-        <!--my:progress_text_size="20sp"-->
-        <!--my:progress_unreach_color="#40E0D0" />-->
+    <com.unimelb.view.HorizontalProgressbarWithProgress
+        android:id="@+id/stepProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="464dp"
+        android:progress="50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        my:progress_reach_color="#339933"
+        my:progress_reach_height="20dp"
+        my:progress_unreach_color="#CCCCCC"
+        my:progress_unreach_height="20dp"
+        my:progress_text_color="#339900"
+        my:progress_text_size="0sp"
+        my:progress_text_offset="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

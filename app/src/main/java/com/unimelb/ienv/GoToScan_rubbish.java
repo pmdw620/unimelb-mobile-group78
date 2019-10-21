@@ -57,7 +57,7 @@ public class GoToScan_rubbish extends AppCompatActivity {
         Cursor cursor = db.rawQuery("select * from TaskCompleter ",
                 null);
         int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
-        db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
+//        db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
         while (cursor.moveToNext()) {
             id = Integer.parseInt(cursor.getString(0));
             rubbish = Integer.parseInt(cursor.getString(1));
@@ -148,7 +148,7 @@ public class GoToScan_rubbish extends AppCompatActivity {
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
                 if (content == "complete"){
 
-
+                //放在这边！！！
 
 
 
