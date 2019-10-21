@@ -18,8 +18,7 @@ public class TaskFragment extends Fragment {
     LayoutInflater inflater1;
     ListView lv;
     TaskItemAdapter adapter1;
-//    TaskDescAdapter adapter2;
-//    int image[] = {R.drawable.leader1,R.drawable.leader2,R.drawable.leader4,R.drawable.leader5,R.drawable.leader6};
+    int image[] = {R.drawable.dining, R.drawable.recycle, R.drawable.quiz};
 
     @Nullable
     @Override
@@ -32,29 +31,16 @@ public class TaskFragment extends Fragment {
         adapter1 = new TaskItemAdapter(getActivity(),R.layout.task_item_layout, list);
         lv.setAdapter(adapter1);
 
-//        lv = (ListView)rootview.findViewById(R.id.descListView);
-//        initList2();
-//        adapter2 = new TaskDescAdapter(getActivity(),R.layout.des_item_layout, list);
-//        lv.setAdapter(adapter2);
-
         return rootview;
     }
 
     private void initList1() {
         list.clear();
         for (int i = 0; i < 3; i++) {
-            TaskItem item = new TaskItem("Im good","Im bad", R.mipmap.task_image1);
+            TaskItem item = new TaskItem("Im good","Im bad", image[i]);
             list.add(item);
         }
     }
-
-//    private void initList2() {
-//        list.clear();
-//        for (int i = 0; i < 3; i++) {
-//            TaskItem item = new TaskItem("Item " + i, R.mipmap.task_image1);
-//            list.add(item);
-//        }
-//    }
 
 }
 
