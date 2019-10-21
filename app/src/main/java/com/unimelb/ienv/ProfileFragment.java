@@ -17,7 +17,6 @@ public class ProfileFragment extends Fragment {
 
     private Button logoutBtn;
     private Button storeBtn;
-    private Button updateBtn;
 
     @Nullable
     @Override
@@ -30,12 +29,13 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         logoutBtn = (Button) getView().findViewById(R.id.logoutBtn);
         storeBtn = (Button) getView().findViewById(R.id.storeBtn);
-        updateBtn = (Button) getView().findViewById(R.id.updateProfileBtn);
 
         logoutBtn.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v){
                MainActivity.mAuth.signOut();
-               getActivity().setContentView(R.layout.activity_main);
+               Intent i = new Intent(getActivity(),MainActivity.class);
+               startActivity(i);
+               getActivity().finish();
            }
         });
     }

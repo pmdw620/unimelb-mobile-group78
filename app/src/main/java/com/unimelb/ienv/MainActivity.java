@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // check if user is logged in or not
         updateUI(currentUser);
+
     }
 
     @Override
@@ -105,10 +107,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     currentUser = mAuth.getCurrentUser();
-                                    Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_SHORT).show();
                                     updateUI(currentUser);
                                 } else{
-                                    Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
