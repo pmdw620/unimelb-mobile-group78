@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SQLiteDatabase sqlDatabase;
     TaskDBModel task = new TaskDBModel();
     private int initstepcount =0;
+    public static int currentstep=0;
 
     private NumberProgressBar bnp;
 //    private Intromanager intromanager;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    public int getinitcount(){
+        return currentstep;
+    }
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -207,8 +211,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             textView.setText(walk + "");
             Log.i("dashboard—init","当前步数"+walk);
-            this.initstepcount= walk;
 
+            this.currentstep=walk;
+            this.initstepcount= walk;
             Intent intent = new Intent(MainActivity.this, BindService.class);
             isBind =  bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
             startService(intent); //绷定并且开启一个服务，绷定是为了方便数据交换，启动是为了当当前app不在活动页的时候，计步服务不会被关闭。需要保证当activity不为活跃状态是计步服务在后台能一直运行！
@@ -219,9 +224,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
-                int res= msg.arg1+initstepcount;
+                currentstep= msg.arg1+initstepcount;
                 View view = mFragments.get(1).getView();
-                textView.setText(res + "");
+                textView.setText( currentstep+ "");
                 Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
                         null);
                 int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
@@ -234,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 task.setDining(dining);
                 task.setQuiz(quiz);
-                task.setWalk(res);
+                task.setWalk(currentstep);
                 task.setRubbish(rubbish);
                 sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
@@ -250,10 +255,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(view!=null){
                     TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
                     bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
-                    a.setText(res + "");
+                    a.setText("step"+currentstep + "");
 
-                    if (res<10000){
-                        bnp.setProgress(res/100);
+                    if (currentstep<10000){
+                        bnp.setProgress(currentstep/100);
 
                     }
                     else {
