@@ -61,8 +61,8 @@ public class TaskFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         updateImage();
         dining_go = (ImageView) getView().findViewById(R.id.dining_go);
-        rubbish_go = (ImageView) getView().findViewById(R.id.storeBtn);
-        quiz_go = (ImageView) getView().findViewById(R.id.logoutBtn);
+        rubbish_go = (ImageView) getView().findViewById(R.id.rubbish_go);
+        quiz_go = (ImageView) getView().findViewById(R.id.quiz_go);
 
         dining_go.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -121,7 +121,7 @@ public class TaskFragment extends Fragment {
         int rubbish = getData()[0];
         int dining = getData()[1];
         if (rubbish>=5){
-            ImageView image1 =getView().findViewById(R.id.storeBtn);
+            ImageView image1 =getView().findViewById(R.id.rubbish_go);
             image1.setImageResource(R.drawable.gogrey);
 
         }

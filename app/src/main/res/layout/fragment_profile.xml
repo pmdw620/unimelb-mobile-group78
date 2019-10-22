@@ -71,14 +71,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="4">
 
             <TextView
                 android:id="@+id/my_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:text="My Score:"
                 android:textAllCaps="false"
                 android:textSize="18sp"
@@ -93,8 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Go To Redeem Shop"
+                android:text="Go To Redeem Shops"
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:typeface="sans"
@@ -149,7 +147,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="4">
 
             <TextView
                 android:id="@+id/textview_desc2"
@@ -157,11 +155,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
                 android:text="Go To Nearby Shops"
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 my:layout_constraintEnd_toEndOf="parent"
                 my:layout_constraintStart_toStartOf="parent"
@@ -212,7 +210,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="4">
 
             <TextView
                 android:id="@+id/textview_desc3"
@@ -220,11 +218,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
                 android:text="Log Out"
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 my:layout_constraintEnd_toEndOf="parent"
                 my:layout_constraintStart_toStartOf="parent"
