@@ -46,20 +46,25 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflater1 = inflater;
         final View rootview = inflater.inflate(R.layout.fragment_profile, null);
-//        int height = getHeight(getActivity());
-//        int width = getWidth(getActivity());
-//        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
-//        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
-//        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
-//        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
-//        lp.height = (int)(height/8);
-//        linearLayout1.setLayoutParams(lp);
-//        lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
-//        lp.height = height/8;
-//        linearLayout2.setLayoutParams(lp);
-//        lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
-//        lp.height = height/8;
-//        linearLayout3.setLayoutParams(lp);
+        int height = getHeight(getActivity());
+        int width = getWidth(getActivity());
+        avatar = rootview.findViewById(R.id.avatar);
+        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
+        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
+        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) avatar.getLayoutParams();
+        lp.height = (int)(height/6);
+        avatar.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
+        lp.height = (int)(height/8);
+        linearLayout1.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
+        lp.height = height/8;
+        linearLayout2.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
+        lp.height = height/8;
+        linearLayout3.setLayoutParams(lp);
         return rootview;
     }
 
