@@ -76,7 +76,7 @@ public class TaskFragment extends Fragment {
         int currentstep = MainActivity.currentstep;
         TextView a = (TextView) getView().findViewById(R.id.bushu);
         NumberProgressBar bnp = (NumberProgressBar)getView().findViewById(R.id.pb_update_progress);
-        a.setText(" step :"+ currentstep);
+        a.setText("Current steps Today :"+ currentstep);
         if (currentstep<10000){
             bnp.setProgress(currentstep/100);
 

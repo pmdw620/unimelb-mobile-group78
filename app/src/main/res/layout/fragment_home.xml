@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
@@ -32,17 +33,18 @@
             android:text="Daily Tips"
             android:textColor="#1A7A08"
             android:textSize="30dp"
-            android:textStyle="italic" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/tips1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
             android:gravity="left"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:paddingTop="10dp"
+            android:paddingRight="20dp"
             android:text="Start a compost heap to reduce the waste you send to landfill sites."
             android:textColor="#1A7A08"
             android:textSize="18dp"
@@ -53,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
             android:gravity="left"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -87,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif-smallcaps"
                 android:gravity="left"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
@@ -94,7 +98,7 @@
                 android:text="Melbourne"
                 android:textColor="#1A7A08"
                 android:textSize="18dp"
-                android:textStyle="italic" />
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/temperature"
@@ -153,6 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif-smallcaps"
                 android:gravity="left"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
@@ -188,10 +193,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif-smallcaps"
                 android:gravity="left"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Week points"
+                android:text="Week points "
                 android:textColor="#1A7A08"
                 android:textSize="20dp"
                 android:textStyle="italic" />

@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(view!=null){
                     TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
                     bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
-                    a.setText("step"+currentstep + "");
+                    a.setText("Current steps Today :"+ currentstep);
 
                     if (currentstep<10000){
                         bnp.setProgress(currentstep/100);
