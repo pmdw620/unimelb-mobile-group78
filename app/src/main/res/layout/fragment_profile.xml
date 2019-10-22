@@ -44,10 +44,10 @@
         android:id="@+id/mapBtn"
         android:layout_width="411dp"
         android:layout_height="0dp"
+        android:text="Service Near Me"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storeBtn"
-        tools:text="Service Near Me" />
+        app:layout_constraintTop_toBottomOf="@+id/storeBtn" />
 
     <TextView
         android:id="@+id/displayName"

@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFragments.add(new TaskFragment());
         mFragments.add(new LeadingBoardFragment());
         mFragments.add(new ProfileFragment());
-        // 初始化展示MessageFragment
-        setFragmentPosition(0);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -136,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         regiBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         forgotBtn.setOnClickListener(this);
+        initData();
 
         // check if user is logged in or not
         updateUI(currentUser);
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
                                         currentUser = mAuth.getCurrentUser();
-                                        Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_SHORT).show();
                                         updateUI(currentUser);
                                     } else{
                                         Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -188,10 +188,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textView = (TextView) findViewById(R.id.busu);
             textView.setVisibility(View.INVISIBLE);
             BottomNavigationView navView = findViewById(R.id.nav_view);
+            // 初始化展示MessageFragment
+            setFragmentPosition(0);
 
             // set default to home fragment
             navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-            initData();
             SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
             sqlDatabase = dbHelper.getWritableDatabase();
             Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
