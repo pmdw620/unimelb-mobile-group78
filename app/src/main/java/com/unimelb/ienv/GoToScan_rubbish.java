@@ -3,6 +3,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -13,10 +17,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +37,7 @@ import com.google.firebase.firestore.*;
 import com.google.android.gms.tasks.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import java.io.InputStream;
 import java.util.Map;
 
 
@@ -47,57 +56,44 @@ public class GoToScan_rubbish extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_to_scan_rubbish);
-        tv_scanResult = (TextView) findViewById(R.id.tv_scanResult);
         btn_scan = (Button) findViewById(R.id.btn_scan);
+        int height = getHeight(this);
+        int width = getWidth(this);
+        ViewGroup.LayoutParams  bp= (ViewGroup.LayoutParams) btn_scan.getLayoutParams();
+        bp.height = height/16;
+        bp.width = width/2;
+        btn_scan.setLayoutParams(bp);
 
-        SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        TaskDBModel task = new TaskDBModel();
 
-        Cursor cursor = db.rawQuery("select * from TaskCompleter ",
-                null);
-        int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
-        db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-        while (cursor.moveToNext()) {
-            id = Integer.parseInt(cursor.getString(0));
-            rubbish = Integer.parseInt(cursor.getString(1));
-            dining = Integer.parseInt(cursor.getString(2));
-            walk = Integer.parseInt(cursor.getString(3));
-            quiz = Integer.parseInt(cursor.getString(4));
+
+
+    }
+    public static int getHeight(Context mContext){
+        int height=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            height = size.y;
+        }else{
+            height = display.getHeight();  // deprecated
         }
-        final int rubbish1 = rubbish;
-        task.setDining(dining);
-        task.setQuiz(quiz);
-        task.setWalk(walk);
-        task.setRubbish(Math.min(5,rubbish+5));
-        db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-        System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
-        final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
-        firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("test", "DocumentSnapshot data: " + document.getData());
-                        Map data = document.getData();
-                        Long weekpoints = (Long)data.get("currWeekPoints")+(Math.min(5,rubbish1+5)-rubbish1);
-                        System.out.println(weekpoints);
-                        Long totalpoints = (Long)data.get("totalPoints")+(Math.min(5,rubbish1+5)-rubbish1);
-                        System.out.println(totalpoints);
-                        firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
-                        firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
-                    } else {
-                        Log.d("test", "No such document");
-                    }
-                } else {
-                    Log.d("test", "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-
+        return height;
+    }
+    public static int getWidth(Context mContext){
+        int width=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x;
+        }
+        else{
+            width = display.getWidth();  // deprecated
+        }
+        return width;
     }
     public void onClick(View v) {
         switch (v.getId()) {
@@ -146,18 +142,57 @@ public class GoToScan_rubbish extends AppCompatActivity {
             if (data != null) {
                 //返回的文本内容　
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
-                if (content == "complete"){
+                System.out.println(content);
+                final int value = Integer.parseInt(content);
+                SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                TaskDBModel task = new TaskDBModel();
 
-
-
-
-
+                Cursor cursor = db.rawQuery("select * from TaskCompleter ",
+                        null);
+                int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
+//                db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
+                while (cursor.moveToNext()) {
+                    id = Integer.parseInt(cursor.getString(0));
+                    rubbish = Integer.parseInt(cursor.getString(1));
+                    dining = Integer.parseInt(cursor.getString(2));
+                    walk = Integer.parseInt(cursor.getString(3));
+                    quiz = Integer.parseInt(cursor.getString(4));
                 }
+                final int rubbish1 = rubbish;
+                task.setDining(dining);
+                task.setQuiz(quiz);
+                task.setWalk(walk);
+                task.setRubbish(Math.min(5,rubbish+value));
+                db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
+                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
+                final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d("test", "DocumentSnapshot data: " + document.getData());
+                                Map data = document.getData();
+                                Long weekpoints = (Long)data.get("currWeekPoints")+(Math.min(5,rubbish1+value)-rubbish1);
+                                System.out.println(weekpoints);
+                                Long totalpoints = (Long)data.get("totalPoints")+(Math.min(5,rubbish1+value)-rubbish1);
+                                System.out.println(totalpoints);
+                                firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
+                                firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
+                            } else {
+                                Log.d("test", "No such document");
+                            }
+                        } else {
+                            Log.d("test", "get failed with ", task.getException());
+                        }
+                    }
+                });
 
                 //返回的BitMap图像
                 Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
 
-                tv_scanResult.setText("你扫描到的内容是：" + content);
             }
         }
     }

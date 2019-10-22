@@ -1,11 +1,19 @@
 package com.unimelb.ienv;
 
+import android.content.Context;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,14 +42,34 @@ public class LeadingBoardFragment extends Fragment {
     ListView lv;
     ListAdapter adapter;
     int image[] = {R.drawable.leader1,R.drawable.leader2,R.drawable.leader4,R.drawable.leader5,R.drawable.leader6};
+    int height = 0;
+    int width = 0;
     @Nullable
     @Override
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflater1 = inflater;
+        height = getHeight(getActivity());
+        width = getWidth(getActivity());
         final View rootview =   inflater.inflate(R.layout.fragment_leadingboard, null);
         lv = (ListView)rootview.findViewById(R.id.leaderListView);
+        ImageView image = rootview.findViewById(R.id.imageView);
+        ViewGroup.LayoutParams ip = (ViewGroup.LayoutParams) image.getLayoutParams();
+        ip.height = height/6;
+        ip.width=(int)(width*0.95);
+        image.setLayoutParams(ip);
 
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) lv.getLayoutParams();
+        lp.height = (int)(height/2.2)+20;
+        lp.width=(int)(width*0.95);
+        lv.setLayoutParams(lp);
+        LinearLayout linear = rootview.findViewById(R.id.mylayout);
+        ViewGroup.LayoutParams llp = (ViewGroup.LayoutParams) linear.getLayoutParams();
+        llp.height = (int)(height/8);
+        llp.width=(int)(width*0.9);
+        linear.setLayoutParams(llp);
         initList();
         adapter = new LeaderBoardAdapter(getActivity(),R.layout.leadedboard_item,list);
         lv.setAdapter(adapter);
@@ -70,6 +98,33 @@ public class LeadingBoardFragment extends Fragment {
 
         return rootview;
 
+    }
+    public static int getWidth(Context mContext){
+        int width=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x;
+        }
+        else{
+            width = display.getWidth();  // deprecated
+        }
+        return width;
+    }
+    public static int getHeight(Context mContext){
+        int height=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            height = size.y;
+        }else{
+            height = display.getHeight();  // deprecated
+        }
+        return height;
     }
     private void initList() {
         FirebaseFirestore firedb = FirebaseFirestore.getInstance();

@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/leaderListView"
         android:layout_width="367dp"
-        android:layout_height="350dp"
+        android:layout_height="280dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="22dp"
@@ -30,10 +30,11 @@
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mylayout"
         android:layout_width="331dp"
-        android:layout_height="106dp"
+        android:layout_height="80dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/leader10"
         android:orientation="horizontal"
@@ -43,7 +44,7 @@
 
         <TextView
             android:id="@+id/myuser"
-            android:layout_width="100dp"
+            android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
@@ -62,5 +63,6 @@
             android:textSize="20dp" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
