@@ -3,6 +3,7 @@ package com.unimelb.ienv;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText pwd2;
     private EditText username;
     private Button regiSubmitBtn;
-    private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private int avatarIndex;
+    private de.hdodenhof.circleimageview.CircleImageView avatarSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +43,17 @@ public class RegisterActivity extends AppCompatActivity {
         pwd2 = (EditText) findViewById(R.id.pwd2);
         username = (EditText) findViewById(R.id.username);
         regiSubmitBtn = (Button) findViewById(R.id.regiSubmitBtn);
-
-        mAuth = FirebaseAuth.getInstance();
+        avatarSelected = findViewById(R.id.avatarSelected);
+        avatarIndex = 1;
+        // set image view onclick listener (change avatar)
+        avatarSelected.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                avatarIndex = (int) (Math.random() * 50 + 1);
+                int resId = getAvatarResourceId();
+                avatarSelected.setImageResource(resId);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
 
@@ -49,19 +63,21 @@ public class RegisterActivity extends AppCompatActivity {
                 // if all the fields pass the validation, create a new user in firebase with email and password
                 if(validation()){
                     Toast.makeText(getApplicationContext(), "Creating Account in Process.\n It will take only few seconds...", Toast.LENGTH_LONG).show();
-                    mAuth.createUserWithEmailAndPassword(email.getText().toString(), pwd1.getText().toString())
+                    MainActivity.mAuth.createUserWithEmailAndPassword(email.getText().toString(), pwd1.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 // check if the task (create user process) if complete
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
+                                        int resId = getAvatarResourceId();
                                         // if the task is completed, store extra fields into firebase;
                                         Map<String, Object> user = new HashMap<>();
                                         user.put("name", username.getText().toString());
                                         user.put("email", email.getText().toString());
                                         user.put("currWeekPoints", 0);
                                         user.put("totalPoints", 0);
-                                        db.collection("UserCollection").document(mAuth.getCurrentUser().getUid()).set(user)
+                                        user.put("avatarId", resId);
+                                        db.collection("UserCollection").document(MainActivity.mAuth.getCurrentUser().getUid()).set(user)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
@@ -76,6 +92,12 @@ public class RegisterActivity extends AppCompatActivity {
                                                     }
                                                 });
 
+                                        // get uid
+                                        MainActivity.mAuth.signInWithEmailAndPassword(email.getText().toString(), pwd1.getText().toString());
+                                        MainActivity.currentUser = MainActivity.mAuth.getCurrentUser();
+                                        String uid = MainActivity.currentUser.getUid();
+
+
                                     }else{
                                         // else, print exception message via Toast.
                                         Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -89,6 +111,12 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private int getAvatarResourceId(){
+        String filename = "avatar"+avatarIndex;
+        int avatarID = getApplicationContext().getResources().getIdentifier(filename, "drawable", getPackageName());
+        return avatarID;
     }
 
     // validation for user input fields

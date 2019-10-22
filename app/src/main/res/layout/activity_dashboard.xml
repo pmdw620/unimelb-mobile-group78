@@ -13,10 +13,9 @@
         android:layout_height="0dp"
         android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -30,4 +29,31 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
+    <TextView
+        android:id="@+id/busu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="200dp"
+        android:text="0"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_container"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/fragment_container"
+        tools:layout_constraintTop_toTopOf="parent" />
+
+<!--    <com.unimelb.ienv.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"-->
+<!--        android:id="@+id/pb_update_progress"-->
+<!--        style="@style/NumberProgressBar_Green"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginBottom="60dp"-->
+<!--        android:padding="20dp"-->
+<!--        android:visibility="invisible"-->
+<!--        custom:layout_constraintBottom_toTopOf="@+id/nav_view"-->
+<!--        custom:layout_constraintEnd_toEndOf="parent"-->
+<!--        custom:layout_constraintStart_toStartOf="parent"-->
+<!--        custom:progress_current="0" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
