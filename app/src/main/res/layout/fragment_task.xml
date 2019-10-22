@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:my="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/task_background">
+
+
 
     <!--task1: dining-->
     <LinearLayout
@@ -38,10 +41,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="12dp"
                 android:text="Eco In Dining"
                 android:textAllCaps="false"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:typeface="sans"
                 my:layout_constraintBottom_toTopOf="@+id/task1_desc_down"
                 my:layout_constraintEnd_toEndOf="parent"
@@ -53,9 +55,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
                 android:text="Scan the QR code and get the eco dining score"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:typeface="sans"
                 my:layout_constraintBottom_toBottomOf="parent"
                 my:layout_constraintEnd_toEndOf="parent"
                 my:layout_constraintStart_toStartOf="parent"
@@ -112,10 +116,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="12dp"
                 android:text="Eco In Recycle"
                 android:textAllCaps="false"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:typeface="sans"
                 my:layout_constraintBottom_toTopOf="@+id/task2_desc_down"
                 my:layout_constraintEnd_toEndOf="parent"
@@ -127,9 +130,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
                 android:text="Scan the QR code and get the recycling score"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:typeface="sans"
                 my:layout_constraintBottom_toBottomOf="parent"
                 my:layout_constraintEnd_toEndOf="parent"
                 my:layout_constraintStart_toStartOf="parent"
@@ -186,10 +191,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="12dp"
                 android:text="Eco In Quiz"
                 android:textAllCaps="false"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:typeface="sans"
                 my:layout_constraintBottom_toTopOf="@+id/task3_desc_down"
                 my:layout_constraintEnd_toEndOf="parent"
@@ -201,9 +205,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
                 android:text="Answer 10 Eco quiz questsions and get 50 score"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:typeface="sans"
                 my:layout_constraintBottom_toBottomOf="parent"
                 my:layout_constraintEnd_toEndOf="parent"
                 my:layout_constraintStart_toStartOf="parent"
@@ -219,6 +225,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textViewBottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
@@ -228,18 +235,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
+    <!--progress bar-->
     <TextView
         android:id="@+id/bushu"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="3dp"
         android:text="0"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_container"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="@+id/fragment_container"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout1"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintTop_toTopOf="parent" />
 
 
@@ -251,9 +259,20 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+    <!--<ListView-->
+        <!--android:id="@+id/taskListView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout_editor_absoluteX="8dp"-->
+        <!--tools:layout_editor_absoluteY="8dp" />-->
+
         app:srcCompat="@drawable/group" />
 
     <com.unimelb.ienv.NumberProgressBar
@@ -262,7 +281,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginBottom="100dp"
         android:padding="20dp"
         android:visibility="visible"
         my:layout_constraintBottom_toBottomOf="parent"
@@ -270,6 +289,7 @@
         my:layout_constraintHorizontal_bias="1.0"
         my:layout_constraintStart_toStartOf="parent"
         my:progress_current="0" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
