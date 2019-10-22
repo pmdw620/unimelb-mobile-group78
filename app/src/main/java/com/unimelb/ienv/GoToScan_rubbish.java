@@ -63,57 +63,8 @@ public class GoToScan_rubbish extends AppCompatActivity {
         bp.height = height/16;
         bp.width = width/2;
         btn_scan.setLayoutParams(bp);
-
-
-        SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        TaskDBModel task = new TaskDBModel();
-
-        Cursor cursor = db.rawQuery("select * from TaskCompleter ",
-                null);
-        int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
-//        db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-        while (cursor.moveToNext()) {
-            id = Integer.parseInt(cursor.getString(0));
-            rubbish = Integer.parseInt(cursor.getString(1));
-            dining = Integer.parseInt(cursor.getString(2));
-            walk = Integer.parseInt(cursor.getString(3));
-            quiz = Integer.parseInt(cursor.getString(4));
-        }
-        final int rubbish1 = rubbish;
-        task.setDining(dining);
-        task.setQuiz(quiz);
-        task.setWalk(walk);
-        task.setRubbish(Math.min(5,rubbish+5));
-        db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-        System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
-        final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
-        firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("test", "DocumentSnapshot data: " + document.getData());
-                        Map data = document.getData();
-                        Long weekpoints = (Long)data.get("currWeekPoints")+(Math.min(5,rubbish1+5)-rubbish1);
-                        System.out.println(weekpoints);
-                        Long totalpoints = (Long)data.get("totalPoints")+(Math.min(5,rubbish1+5)-rubbish1);
-                        System.out.println(totalpoints);
-                        firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
-                        firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
-                    } else {
-                        Log.d("test", "No such document");
-                    }
-                } else {
-                    Log.d("test", "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-
     }
+
     public static int getHeight(Context mContext){
         int height=0;
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
