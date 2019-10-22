@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+
 import android.content.Intent;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.content.Context;
 import android.view.WindowManager;
 import android.view.Display;
@@ -22,9 +21,6 @@ import android.graphics.Point;
 import android.widget.LinearLayout;
 
 import android.widget.Toast;
-
-
-import java.util.*;
 
 public class TaskFragment extends Fragment {
 
@@ -45,8 +41,8 @@ public class TaskFragment extends Fragment {
         int height = getHeight(getActivity());
         int width = getWidth(getActivity());
         LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
-        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
-        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout1);
+        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout2);
         ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
         lp.height = (int)(height/8);
         linearLayout1.setLayoutParams(lp);
@@ -60,15 +56,13 @@ public class TaskFragment extends Fragment {
         return rootview;
     }
 
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         updateImage();
         dining_go = (ImageView) getView().findViewById(R.id.dining_go);
-        rubbish_go = (ImageView) getView().findViewById(R.id.rubbish_go);
-        quiz_go = (ImageView) getView().findViewById(R.id.quiz_go);
+        rubbish_go = (ImageView) getView().findViewById(R.id.storeBtn);
+        quiz_go = (ImageView) getView().findViewById(R.id.logoutBtn);
 
         dining_go.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -100,6 +94,7 @@ public class TaskFragment extends Fragment {
 
         // quiz_go holder!!!!
     }
+
     public int[] getData(){
         SQLiteOpenHelper dbHelper = new TaskDBOpener(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -126,7 +121,7 @@ public class TaskFragment extends Fragment {
         int rubbish = getData()[0];
         int dining = getData()[1];
         if (rubbish>=5){
-            ImageView image1 =getView().findViewById(R.id.rubbish_go);
+            ImageView image1 =getView().findViewById(R.id.storeBtn);
             image1.setImageResource(R.drawable.gogrey);
 
         }

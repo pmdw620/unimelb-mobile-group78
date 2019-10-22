@@ -2,64 +2,251 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/task_background">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/avatar"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="136dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:src="@drawable/avatar1"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="411dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="110dp"
-        android:text="LOG OUT"
+    <TextView
+        android:id="@+id/displayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="User Name"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:typeface="sans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
-    <Button
-        android:id="@+id/storeBtn"
-        android:layout_width="411dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="50dp"
-        android:text="Store"
+    <TextView
+        android:id="@+id/split_1"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayName" />
 
-    <Button
-        android:id="@+id/mapBtn"
-        android:layout_width="411dp"
-        android:layout_height="0dp"
+    <!--task1: shop-->
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storeBtn"
-        tools:text="Service Near Me" />
+        app:layout_constraintTop_toBottomOf="@+id/split_1">
+
+        <ImageView
+            android:id="@+id/ll1_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_shop" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/my_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="My Score:"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:typeface="sans"
+                my:layout_constraintBottom_toTopOf="@+id/task2_desc_down"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_desc1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Go To Redeem Shop"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:typeface="sans"
+                app:layout_constraintTop_toBottomOf="@+id/my_score"
+                my:layout_constraintBottom_toBottomOf="parent"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toBottomOf="@+id/my_score" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/storeBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:src="@drawable/profile_arrow" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/displayName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="136dp"
-        android:text="TextView"
-        android:textSize="36sp"
+        android:id="@+id/split_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
+    <!--task2: nearby shops-->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/split_2">
+
+        <ImageView
+            android:id="@+id/ll2_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_nearby" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/textview_desc2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="Go To Nearby Shops"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:typeface="sans"
+                app:layout_constraintHorizontal_bias="0.0"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/mapBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_arrow" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/split_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <!--task3: log out-->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/split_3">
+
+        <ImageView
+            android:id="@+id/ll3_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_exit" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/textview_desc3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="Log Out"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:typeface="sans"
+                app:layout_constraintHorizontal_bias="0.0"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/logoutBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile_arrow" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/split_4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
