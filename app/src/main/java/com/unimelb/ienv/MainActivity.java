@@ -31,9 +31,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button regiBtn;
@@ -145,6 +152,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateUI(currentUser);
 
     }
+    public void updateTime(){
+        final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        final FirebaseFirestore firedb = FirebaseFirestore.getInstance();
+        final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("test", "DocumentSnapshot data: " + document.getData());
+                        Map data = document.getData();
+                        Long lastLogin = (Long) data.get("continueLogin");
+                        String lastDate = data.get("lastLoginTime").toString();
+                        if (lastDate.equals(currentDate)){
+                            Log.d("test", "Same day!");
+                        }
+                        else {
+                            lastDate = currentDate;
+                            lastLogin +=1;
+                            firedb.collection("UserCollection").document(username).update("continueLogin",lastLogin);
+                            firedb.collection("UserCollection").document(username).update("lastLoginTime",lastDate);
+                            SQLiteOpenHelper dbHelper = new TaskDBOpener(getApplicationContext());
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                            TaskDBModel updatetask = new TaskDBModel();
+
+                            int id = 1;
+                            db.update(TaskDBModel.TABLE_NAME, updatetask.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
+
+                            TextView tv = findViewById(R.id.todaypoints);
+                            tv.setText("0");
+                            Toast.makeText(getApplicationContext(), "Congrats for a new day!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Log.d("test", "No such document");
+                    }
+                } else {
+                    Log.d("test", "get failed with ", task.getException());
+                }
+            }
+        });
+    }
 
     @Override
     public void onClick(View view) {
@@ -188,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void updateUI(FirebaseUser user){
         if(user!=null){
+            updateTime();
             setContentView(R.layout.activity_dashboard);
             textView = (TextView) findViewById(R.id.busu);
             textView.setVisibility(View.INVISIBLE);
