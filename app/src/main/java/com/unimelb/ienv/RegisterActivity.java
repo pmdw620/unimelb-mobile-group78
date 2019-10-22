@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         regiSubmitBtn = (Button) findViewById(R.id.regiSubmitBtn);
         avatarSelected = findViewById(R.id.avatarSelected);
-        avatarIndex = 0;
+        avatarIndex = 1;
         // set image view onclick listener (change avatar)
         avatarSelected.setOnClickListener(new View.OnClickListener(){
             @Override
