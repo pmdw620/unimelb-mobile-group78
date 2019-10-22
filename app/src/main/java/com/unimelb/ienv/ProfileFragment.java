@@ -1,14 +1,20 @@
 package com.unimelb.ienv;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +32,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileFragment extends Fragment {
 
-    private Button logoutBtn;
-    private Button storeBtn;
-    private Button mapBtn;
+    LayoutInflater inflater1;
+    private ImageView logoutBtn;
+    private ImageView storeBtn;
+    private ImageView mapBtn;
     private TextView displayName;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
     private FirebaseFirestore db;
@@ -37,15 +44,31 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, null);
+        inflater1 = inflater;
+        final View rootview = inflater.inflate(R.layout.fragment_profile, null);
+//        int height = getHeight(getActivity());
+//        int width = getWidth(getActivity());
+//        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
+//        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
+//        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+//        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
+//        lp.height = (int)(height/8);
+//        linearLayout1.setLayoutParams(lp);
+//        lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
+//        lp.height = height/8;
+//        linearLayout2.setLayoutParams(lp);
+//        lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
+//        lp.height = height/8;
+//        linearLayout3.setLayoutParams(lp);
+        return rootview;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        logoutBtn = (Button) getView().findViewById(R.id.logoutBtn);
-        storeBtn = (Button) getView().findViewById(R.id.storeBtn);
-        mapBtn = (Button) getView().findViewById(R.id.mapBtn);
+        logoutBtn = (ImageView) getView().findViewById(R.id.logoutBtn);
+        storeBtn = (ImageView) getView().findViewById(R.id.storeBtn);
+        mapBtn = (ImageView) getView().findViewById(R.id.mapBtn);
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
         db = FirebaseFirestore.getInstance();
@@ -73,5 +96,34 @@ public class ProfileFragment extends Fragment {
                getActivity().finish();
            }
         });
+    }
+
+    public static int getWidth(Context mContext){
+        int width=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x;
+        }
+        else{
+            width = display.getWidth();  // deprecated
+        }
+        return width;
+    }
+
+    public static int getHeight(Context mContext){
+        int height=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            height = size.y;
+        }else{
+            height = display.getHeight();  // deprecated
+        }
+        return height;
     }
 }

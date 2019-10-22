@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,8 +48,8 @@ public class HomeFragment extends Fragment {
         int height = getHeight(getActivity());
         int width = getWidth(getActivity());
         LinearLayout linearLayout = rootview.findViewById(R.id.linearLayout);
-        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout2);
-        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout3);
+        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
+        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
         ImageView image = rootview.findViewById(R.id.imageView3);
         ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) linearLayout.getLayoutParams();
         lp.height = (int)(height/3);
