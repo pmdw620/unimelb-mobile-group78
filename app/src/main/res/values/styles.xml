@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:fontFamily">@font/cousine</item>>-->
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -21,7 +22,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="progress_max">100</item>
         <item name="progress_current">0</item>
-        <item name="progress_unreached_color">#CCCCCC</item>
+        <item name="progress_unreached_color">#FFCE47</item>
         <item name="progress_reached_color">#70A800</item>
         <item name="progress_text_size">20sp</item>
         <item name="progress_text_color">#70A800</item>

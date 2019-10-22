@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText loginPwd;
     public static FirebaseAuth mAuth;
     public static FirebaseUser currentUser;
+    private FirebaseFirestore firedb;
 
     List<Fragment> mFragments;
     private int lastIndex;
@@ -271,10 +272,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+    private void updatefirebase (){
+        final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firedb = FirebaseFirestore.getInstance();
+        firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("test", "DocumentSnapshot data: " + document.getData());
+                        Map data = document.getData();
+                        Long weekpoints = (Long)data.get("currWeekPoints")+1;
+                        System.out.println(weekpoints);
+                        Long totalpoints = (Long)data.get("totalPoints")+1;
+                        System.out.println(totalpoints);
+                        firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
+                        firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
+                    } else {
+                        Log.d("test", "No such document");
+                    }
+                } else {
+                    Log.d("test", "get failed with ", task.getException());
+                }
+            }
+        });
+    }
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
+                if (((msg.arg1+initstepcount)/1000)>(currentstep/1000) &&(msg.arg1+initstepcount<=10000) ){
+                    updatefirebase();
+                }
                 currentstep= msg.arg1+initstepcount;
                 View view = mFragments.get(1).getView();
                 textView.setText( currentstep+ "");
@@ -295,18 +325,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
 
-//                if ((res)<10000){
-//
-//                    bnp.setProgress(res/100);
-//
-//                }
-//                else {
-//                    bnp.setProgress(100);
-//                }
+
                 if(view!=null){
                     TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
                     bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
-                    a.setText("step"+currentstep + "");
+                    a.setText("Current steps Today :"+ currentstep);
 
                     if (currentstep<10000){
                         bnp.setProgress(currentstep/100);
