@@ -133,20 +133,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.loginBtn:{
-                // perform login authentication function
-                mAuth.signInWithEmailAndPassword(loginEmail.getText().toString(), loginPwd.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    currentUser = mAuth.getCurrentUser();
-                                    Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_SHORT).show();
-                                    updateUI(currentUser);
-                                } else{
-                                    Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                if(!loginEmail.getText().toString().equals("") && !loginPwd.getText().toString().equals("")){
+                    // perform login authentication function
+                    mAuth.signInWithEmailAndPassword(loginEmail.getText().toString(), loginPwd.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        currentUser = mAuth.getCurrentUser();
+                                        Toast.makeText(MainActivity.this, "Log in button clicked", Toast.LENGTH_SHORT).show();
+                                        updateUI(currentUser);
+                                    } else{
+                                        Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                } else{
+                    Toast.makeText(getApplicationContext(), "username/password should not be null", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             }
             case R.id.forgotBtn:{
