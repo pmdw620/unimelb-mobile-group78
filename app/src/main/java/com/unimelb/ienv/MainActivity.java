@@ -34,14 +34,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
->>>>>>> 27439bd970a5f711224210db9fff1594ca2b2695
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -75,19 +71,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFragments.add(new TaskFragment());
         mFragments.add(new LeadingBoardFragment());
         mFragments.add(new ProfileFragment());
-<<<<<<< HEAD
-        // 初始化展示MessageFragment
-        setFragmentPosition(0);
-    }
-
-=======
 
     }
 
     public int getinitcount(){
         return currentstep;
     }
->>>>>>> 27439bd970a5f711224210db9fff1594ca2b2695
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -259,10 +248,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // set default to home fragment
             navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-<<<<<<< HEAD
-            initData();
-=======
->>>>>>> 27439bd970a5f711224210db9fff1594ca2b2695
             SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
             sqlDatabase = dbHelper.getWritableDatabase();
             Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
@@ -290,16 +275,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
-<<<<<<< HEAD
-                int res= msg.arg1+initstepcount;
-                TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
-                bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
-                textView.setText(res + "");
-=======
                 currentstep= msg.arg1+initstepcount;
                 View view = mFragments.get(1).getView();
                 textView.setText( currentstep+ "");
->>>>>>> 27439bd970a5f711224210db9fff1594ca2b2695
                 Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
                         null);
                 int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
@@ -325,13 +303,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                else {
 //                    bnp.setProgress(100);
 //                }
-<<<<<<< HEAD
-                if(a!=null){
-                    a.setText(res + "");
-
-                    if (res<10000){
-                        bnp.setProgress(res/10000);
-=======
                 if(view!=null){
                     TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
                     bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
@@ -339,7 +310,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (currentstep<10000){
                         bnp.setProgress(currentstep/100);
->>>>>>> 27439bd970a5f711224210db9fff1594ca2b2695
 
                     }
                     else {
