@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         logoutBtn = (Button) getView().findViewById(R.id.logoutBtn);
         storeBtn = (Button) getView().findViewById(R.id.storeBtn);
-        mapBtn = (Button) getView().findViewById(R.id.mapBtn);
+//        mapBtn = (Button) getView().findViewById(R.id.mapBtn);
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
         db = FirebaseFirestore.getInstance();
@@ -68,8 +68,8 @@ public class ProfileFragment extends Fragment {
         mapBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MapActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), MapActivity.class);
+//                startActivity(intent);
             }
         });
 

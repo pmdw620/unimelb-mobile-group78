@@ -220,8 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
                 int res= msg.arg1+initstepcount;
-                TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
-                bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
+                View view = mFragments.get(1).getView();
                 textView.setText(res + "");
                 Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
                         null);
@@ -248,11 +247,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                else {
 //                    bnp.setProgress(100);
 //                }
-                if(a!=null){
+                if(view!=null){
+                    TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
+                    bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
                     a.setText(res + "");
 
                     if (res<10000){
-                        bnp.setProgress(res/10000);
+                        bnp.setProgress(res/100);
 
                     }
                     else {
