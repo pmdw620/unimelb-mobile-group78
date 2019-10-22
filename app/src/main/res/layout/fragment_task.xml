@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/task_background">
 
+
+
     <!--task1: dining-->
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -229,10 +231,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
+    <TextView
+        android:id="@+id/bushu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="200dp"
+        android:text="0"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_container"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/fragment_container"
+        tools:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/stepcountbackground"
+        android:layout_width="300dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
     <!--<ListView-->
         <!--android:id="@+id/taskListView"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--tools:layout_editor_absoluteX="8dp"-->
         <!--tools:layout_editor_absoluteY="8dp" />-->
+
+        app:srcCompat="@drawable/group" />
+
+    <com.unimelb.ienv.NumberProgressBar
+        android:id="@+id/pb_update_progress"
+        style="@style/NumberProgressBar_Green"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="212dp"
+        android:padding="20dp"
+        android:visibility="visible"
+        my:layout_constraintBottom_toBottomOf="parent"
+        my:layout_constraintEnd_toEndOf="parent"
+        my:layout_constraintHorizontal_bias="1.0"
+        my:layout_constraintStart_toStartOf="parent"
+        my:progress_current="0" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
