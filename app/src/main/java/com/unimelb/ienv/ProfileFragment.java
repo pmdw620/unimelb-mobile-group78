@@ -34,6 +34,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseFirestore db;
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,13 +66,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        mapBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getContext(), MapActivity.class);
-//                startActivity(intent);
-            }
-        });
+//        mapBtn.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+////                Intent intent = new Intent(getContext(), MapActivity.class);
+////                startActivity(intent);
+//            }
+//        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v){

@@ -44,6 +44,7 @@ public class LeadingBoardFragment extends Fragment {
     int image[] = {R.drawable.leader1,R.drawable.leader2,R.drawable.leader4,R.drawable.leader5,R.drawable.leader6};
     int height = 0;
     int width = 0;
+    View rootview ;
     @Nullable
     @Override
 
@@ -53,7 +54,7 @@ public class LeadingBoardFragment extends Fragment {
         inflater1 = inflater;
         height = getHeight(getActivity());
         width = getWidth(getActivity());
-        final View rootview =   inflater.inflate(R.layout.fragment_leadingboard, null);
+        rootview =   inflater.inflate(R.layout.fragment_leadingboard, null);
         lv = (ListView)rootview.findViewById(R.id.leaderListView);
         ImageView image = rootview.findViewById(R.id.imageView);
         ViewGroup.LayoutParams ip = (ViewGroup.LayoutParams) image.getLayoutParams();
@@ -161,5 +162,33 @@ public class LeadingBoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initList();
+        String username= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore firedb = FirebaseFirestore.getInstance();
+        firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("test", "DocumentSnapshot data: " + document.getData());
+                        View myname = (TextView)rootview.findViewById(R.id.myuser);
+                        View mypoint = (TextView)rootview.findViewById(R.id.myuserpoint);
+                        ((TextView) myname).setText((String)document.getData().get("name"));
+                        System.out.println(document.getData().get("currWeekPoints").toString());
+                        ((TextView) mypoint).setText(document.getData().get("currWeekPoints").toString());
+                    } else {
+                        Log.d("test", "No such document");
+                    }
+                } else {
+                    Log.d("test", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 }

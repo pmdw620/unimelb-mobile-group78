@@ -26,6 +26,7 @@ public class TaskFragment extends Fragment {
     private ImageView dining_go;
     private ImageView rubbish_go;
     private ImageView quiz_go;
+    View rootview;
     //    int image[] = {R.drawable.dining, R.drawable.recycle, R.drawable.quiz};
 //    String[] desc_up = {"Eco IN Dining", "Eco IN Recycle", "Eco IN Quiz"};
 //    String[] desc_down = {"Scan the QR code and get the eco dining score",
@@ -35,7 +36,7 @@ public class TaskFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflater1 = inflater;
 
-        final View rootview = inflater.inflate(R.layout.fragment_task, null);
+        rootview = inflater.inflate(R.layout.fragment_task, null);
         return rootview;
     }
 
