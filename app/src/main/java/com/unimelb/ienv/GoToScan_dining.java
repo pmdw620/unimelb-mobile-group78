@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,8 +26,10 @@ import androidx.core.content.ContextCompat;
 //import android.support.v4.content.ContextCompat;
 //import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,13 +52,19 @@ public class GoToScan_dining extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_to_scan_dining);
-        tv_scanResult = (TextView) findViewById(R.id.tv_scanResult);
         btn_scan = (Button) findViewById(R.id.btn_scan);
+
+        int height = getHeight(this);
+        int width = getWidth(this);
+        ViewGroup.LayoutParams  bp= (ViewGroup.LayoutParams) btn_scan.getLayoutParams();
+        bp.height = height/16;
+        bp.width = width/2;
+        btn_scan.setLayoutParams(bp);
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.dining_go:
+            case R.id.btn_scan:
                 //动态权限申请
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
@@ -92,10 +102,10 @@ public class GoToScan_dining extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 扫描二维码/条码回传
+        // return scanned QR code
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
-                //返回的文本内容　
+                //returned text　
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
                 System.out.println(content);
                 final int value = Integer.parseInt(content);
@@ -114,13 +124,13 @@ public class GoToScan_dining extends AppCompatActivity {
                     walk = Integer.parseInt(cursor.getString(3));
                     quiz = Integer.parseInt(cursor.getString(4));
                 }
-                final int rubbish1 = rubbish;
-                task.setDining(dining);
+                task.setRubbish(rubbish);
+                final int dining1 = dining;
+                task.setDining(Math.min(8,dining+value));
                 task.setQuiz(quiz);
                 task.setWalk(walk);
-                task.setRubbish(Math.min(5,rubbish+value));
                 db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
+                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//output data
                 final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
                 firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -130,9 +140,9 @@ public class GoToScan_dining extends AppCompatActivity {
                             if (document.exists()) {
                                 Log.d("test", "DocumentSnapshot data: " + document.getData());
                                 Map data = document.getData();
-                                Long weekpoints = (Long)data.get("currWeekPoints")+(Math.min(5,rubbish1+value)-rubbish1);
+                                Long weekpoints = (Long)data.get("currWeekPoints")+(Math.min(8,dining1+value)-dining1);
                                 System.out.println(weekpoints);
-                                Long totalpoints = (Long)data.get("totalPoints")+(Math.min(5,rubbish1+value)-rubbish1);
+                                Long totalpoints = (Long)data.get("totalPoints")+(Math.min(8,dining1+value)-dining1);
                                 System.out.println(totalpoints);
                                 firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
                                 firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
@@ -145,10 +155,38 @@ public class GoToScan_dining extends AppCompatActivity {
                     }
                 });
 
-                //返回的BitMap图像
+                //returned BitMap image
                 Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
             }
         }
+    }
+
+    public static int getHeight(Context mContext){
+        int height=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            height = size.y;
+        }else{
+            height = display.getHeight();  // deprecated
+        }
+        return height;
+    }
+    public static int getWidth(Context mContext){
+        int width=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x;
+        }
+        else{
+            width = display.getWidth();  // deprecated
+        }
+        return width;
     }
 
 }

@@ -28,10 +28,9 @@ public class ProfileFragment extends Fragment {
 
     private Button logoutBtn;
     private Button storeBtn;
-    private Button leadingBoardBtn;
+    private Button mapBtn;
     private TextView displayName;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
-    private SQLiteDatabase localDB;
     private FirebaseFirestore db;
 
 
@@ -46,7 +45,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         logoutBtn = (Button) getView().findViewById(R.id.logoutBtn);
         storeBtn = (Button) getView().findViewById(R.id.storeBtn);
-        leadingBoardBtn = (Button) getView().findViewById(R.id.leadingBoardBtn);
+        mapBtn = (Button) getView().findViewById(R.id.mapBtn);
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
         db = FirebaseFirestore.getInstance();

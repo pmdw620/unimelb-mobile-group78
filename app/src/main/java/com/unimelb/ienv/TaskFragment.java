@@ -14,7 +14,15 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.content.Context;
+import android.view.WindowManager;
+import android.view.Display;
+import android.os.Build;
+import android.graphics.Point;
+import android.widget.LinearLayout;
+
 import android.widget.Toast;
+
 
 import java.util.*;
 
@@ -33,8 +41,26 @@ public class TaskFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflater1 = inflater;
         final View rootview = inflater.inflate(R.layout.fragment_task, null);
+
+        int height = getHeight(getActivity());
+        int width = getWidth(getActivity());
+        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
+        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
+        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
+        lp.height = (int)(height/8);
+        linearLayout1.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
+        lp.height = height/8;
+        linearLayout2.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
+        lp.height = height/8;
+        linearLayout3.setLayoutParams(lp);
+
         return rootview;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -49,7 +75,7 @@ public class TaskFragment extends Fragment {
             public void onClick(View view) {
                 int dining = getData()[1];
                 if(dining >= 8){
-                    Toast.makeText(getContext(), "Reach Today's Limit!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Reach Today's Limit: 8 points!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Intent intent = new Intent(getActivity(), GoToScan_dining.class);
@@ -63,7 +89,7 @@ public class TaskFragment extends Fragment {
             public void onClick(View view) {
                 int rubbish = getData()[0];
                 if(rubbish >= 5){
-                    Toast.makeText(getContext(), "Reach Today's Limit!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Reach Today's Limit: 5 points!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Intent intent = new Intent(getActivity(), GoToScan_rubbish.class);
@@ -116,4 +142,35 @@ public class TaskFragment extends Fragment {
         super.onResume();
         updateImage();
     }
+
+    public static int getWidth(Context mContext){
+        int width=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            width = size.x;
+        }
+        else{
+            width = display.getWidth();  // deprecated
+        }
+        return width;
+    }
+
+    public static int getHeight(Context mContext){
+        int height=0;
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            Point size = new Point();
+            display.getSize(size);
+            height = size.y;
+        }else{
+            height = display.getHeight();  // deprecated
+        }
+        return height;
+    }
+
+
 }

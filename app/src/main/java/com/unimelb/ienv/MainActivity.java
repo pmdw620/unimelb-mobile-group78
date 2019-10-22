@@ -3,6 +3,7 @@ package com.unimelb.ienv;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.ComponentName;
@@ -31,9 +32,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button regiBtn;
     private Button loginBtn;
     private Button forgotBtn;
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static FirebaseAuth mAuth;
     public static FirebaseUser currentUser;
 
+    List<Fragment> mFragments;
+    private int lastIndex;
+
     private BindService bindService;
     private TextView textView;
     private boolean isBind;
@@ -49,48 +54,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TaskDBModel task = new TaskDBModel();
     private int initstepcount =0;
 
-//    private NumberProgressBar bnp;
+    private NumberProgressBar bnp;
 //    private Intromanager intromanager;
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment = null;
-        switch (menuItem.getItemId()){
-            case R.id.navigation_profile:
-                fragment = new ProfileFragment();
-                textView.setVisibility(View.INVISIBLE);
-                break;
-
-            case R.id.navigation_task:
-                fragment = new TaskFragment();
-                textView.setVisibility(View.VISIBLE);
-                break;
-
-            case R.id.navigation_leadingboard:
-                fragment = new LeadingBoardFragment();
-                textView.setVisibility(View.INVISIBLE);
-                break;
-
-            case R.id.navigation_home:
-                fragment = new HomeFragment();
-                textView.setVisibility(View.INVISIBLE);
-                break;
-        }
-
-        return loadFragment(fragment);
+    public void initData() {
+        mFragments = new ArrayList<>();
+        mFragments.add(new HomeFragment());
+        mFragments.add(new TaskFragment());
+        mFragments.add(new LeadingBoardFragment());
+        mFragments.add(new ProfileFragment());
+        // 初始化展示MessageFragment
+        setFragmentPosition(0);
     }
 
-    private boolean loadFragment(Fragment fragment){
-        if(fragment!=null){
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Log.d("123", "onNavigationItemSelected is click: ");
+            switch (item.getItemId()) {
 
+                case R.id.navigation_home:
+                    Log.d("dashboard", "R.id.navigation_home: ");
+                    setFragmentPosition(0);
+                    break;
+                case R.id.navigation_task:
+                    Log.d("dashboard", "R.id.navigation_dashboard: ");
+                    setFragmentPosition(1);
+                    break;
+                case R.id.navigation_leadingboard:
+                    Log.d("dashboard", "R.id.leading_board: ");
+                    setFragmentPosition(2);
+                    break;
+                case R.id.navigation_profile:
+                    Log.d("dashboard", "R.id.navigation_me: ");
+                    setFragmentPosition(3);
+                    break;
+            }
+            Log.d("dashboard", "xxxxx ");
             return true;
         }
-        return false;
+    };
+    private void setFragmentPosition(int position) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment currentFragment = mFragments.get(position);
+        Fragment lastFragment = mFragments.get(lastIndex);
+        lastIndex = position;
+        ft.hide(lastFragment);
+        if (!currentFragment.isAdded()) {
+            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+            ft.add(R.id.fragment_container, currentFragment);
+        }
+        ft.show(currentFragment);
+        ft.commitAllowingStateLoss();
+
     }
 
     @Override
@@ -172,10 +190,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             BottomNavigationView navView = findViewById(R.id.nav_view);
 
             // set default to home fragment
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment())
-                    .commit();
-            navView.setOnNavigationItemSelectedListener(this);
+            navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+            initData();
             SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
             sqlDatabase = dbHelper.getWritableDatabase();
             Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
@@ -203,6 +219,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
                 int res= msg.arg1+initstepcount;
+                TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
+                bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
                 textView.setText(res + "");
                 Cursor cursor = sqlDatabase.rawQuery("select * from TaskCompleter ",
                         null);
@@ -229,6 +247,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                else {
 //                    bnp.setProgress(100);
 //                }
+                if(a!=null){
+                    a.setText(res + "");
+
+                    if (res<10000){
+                        bnp.setProgress(res/10000);
+
+                    }
+                    else {
+                        bnp.setProgress(100);
+                    }
+                }
             }
             return false;
         }
