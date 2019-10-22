@@ -6,49 +6,227 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--task1: dining-->
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="60dp"
+        android:orientation="horizontal"
+        my:layout_constraintEnd_toEndOf="parent"
+        my:layout_constraintStart_toStartOf="parent"
+        my:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/task1_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/dining" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/task1_desc_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:text="Eco In Dining"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:typeface="sans"
+                my:layout_constraintBottom_toTopOf="@+id/task1_desc_down"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/task1_desc_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="16dp"
+                android:text="Scan the QR code and get the eco dining score"
+                my:layout_constraintBottom_toBottomOf="parent"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toBottomOf="@+id/task1_desc_up" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/dining_go"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:src="@drawable/go_button" />
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:layout_marginBottom="32dp"
-        android:text="Task XML"
-        app:layout_constraintBottom_toTopOf="@+id/button_rubbish"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
 
-    <Button
-        android:id="@+id/button_rubbish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginBottom="37dp"
-        android:onClick="onClick"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/button_dining"
+    <!--task2: rubbish-->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
-    <Button
-        android:id="@+id/button_dining"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginBottom="371dp"
-        android:onClick="onClick"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/task2_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/recycle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/task2_desc_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:text="Eco In Recycle"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:typeface="sans"
+                my:layout_constraintBottom_toTopOf="@+id/task2_desc_down"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/task2_desc_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="16dp"
+                android:text="Scan the QR code and get the recycling score"
+                my:layout_constraintBottom_toBottomOf="parent"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toBottomOf="@+id/task2_desc_up" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/rubbish_go"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:src="@drawable/go_button" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_rubbish" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <!--task3: quiz-->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ImageView
+            android:id="@+id/task3_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/quiz" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/task3_desc_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:text="Eco In Quiz"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:typeface="sans"
+                my:layout_constraintBottom_toTopOf="@+id/task3_desc_down"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/task3_desc_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="16dp"
+                android:text="Answer 10 Eco quiz questsions and get 50 score"
+                my:layout_constraintBottom_toBottomOf="parent"
+                my:layout_constraintEnd_toEndOf="parent"
+                my:layout_constraintStart_toStartOf="parent"
+                my:layout_constraintTop_toBottomOf="@+id/task3_desc_up" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/quiz_go"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/go_button" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#C2C2C2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <TextView
         android:id="@+id/bushu"
@@ -64,20 +242,7 @@
         app:layout_constraintStart_toStartOf="@+id/fragment_container"
         tools:layout_constraintTop_toTopOf="parent" />
 
-    <!--<com.unimelb.view.HorizontalProgressbarWithProgress-->
-    <!--android:id="@+id/stepProgressBar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="464dp"-->
-    <!--android:progress="50"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="0.0"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--my:progress_reach_color="#7CFC00"-->
-    <!--my:progress_text_color="#2F4F4F"-->
-    <!--my:progress_text_size="20sp"-->
-    <!--my:progress_unreach_color="#40E0D0" />-->
+
     <ImageView
         android:id="@+id/stepcountbackground"
         android:layout_width="300dp"
@@ -106,15 +271,5 @@
         my:layout_constraintStart_toStartOf="parent"
         my:progress_current="0" />
 
-    <!--    <com.unimelb.ienv.NumberProgressBar xmlns:custom="http://schemas.android.com/apk/res-auto"-->
-<!--        android:id="@+id/pb_update_progress"-->
-<!--        style="@style/NumberProgressBar_Passing_Green"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:padding="20dp"-->
-<!--        custom:layout_constraintEnd_toEndOf="parent"-->
-<!--        custom:layout_constraintStart_toStartOf="parent"-->
-<!--        custom:layout_constraintTop_toBottomOf="@+id/stepcountbackground"-->
-<!--        custom:progress_current="0" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
