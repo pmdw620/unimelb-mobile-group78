@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -71,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
                                         int resId = getAvatarResourceId();
-                                        final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                                         // if the task is completed, store extra fields into firebase;
                                         Map<String, Object> user = new HashMap<>();
                                         user.put("name", username.getText().toString());
@@ -79,9 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
                                         user.put("currWeekPoints", 0);
                                         user.put("totalPoints", 0);
                                         user.put("avatarId", resId);
-                                        user.put("continueLogin",1);
-
-                                        user.put("lastLoginTime",currentDate);
                                         db.collection("UserCollection").document(MainActivity.mAuth.getCurrentUser().getUid()).set(user)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
