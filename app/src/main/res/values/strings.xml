@@ -132,4 +132,5 @@
     <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
     <string name="viewfinderview_status_text2">即可自动扫描</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
