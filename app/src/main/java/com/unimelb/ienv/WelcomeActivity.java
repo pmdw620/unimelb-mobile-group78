@@ -17,26 +17,28 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
         setContentView(R.layout.activity_welcome);
         new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
                 if(ToolKits.GetBoolean(WelcomeActivity.this,IS_FIRST,false))
                 {
-                    //如果默认值为false，则没有登陆过，跳转到引导页
                     Log.i("welcome","guide");
                     startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
-                    //将boolean值设置为true
                     ToolKits.putBoolean(WelcomeActivity.this,IS_FIRST,true);
+                    WelcomeActivity.this.finish();
                 }else{
-                    //否则跳转为主页
                     Log.i("welcome","login");
-                    startActivity(new Intent(WelcomeActivity.this,yindaoactivity.class));
+                    startActivity(new Intent(WelcomeActivity.this, GuideActivity.class));
+                    WelcomeActivity.this.finish();
                 }
                 ToolKits.putBoolean(WelcomeActivity.this,IS_FIRST,true);
                 return true;
             }
-        }).sendEmptyMessageDelayed(0,3000);/*延迟3s*/
+        }).sendEmptyMessageDelayed(0,1000);
 
     }
 }
