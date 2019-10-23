@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment {
     private ImageView storeBtn;
     private ImageView mapBtn;
     private TextView displayName;
+    private TextView my_score;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
     private FirebaseFirestore db;
     private boolean mLocationPermissionGranted = false;
@@ -51,6 +52,24 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflater1 = inflater;
         final View rootview = inflater.inflate(R.layout.fragment_profile, null);
+        int height = getHeight(getActivity());
+        int width = getWidth(getActivity());
+        avatar = rootview.findViewById(R.id.avatar);
+        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
+        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
+        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) avatar.getLayoutParams();
+        lp.height = (int)(height/8);
+        avatar.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
+        lp.height = (int)(height/8);
+        linearLayout1.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
+        lp.height = height/8;
+        linearLayout2.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
+        lp.height = height/8;
+        linearLayout3.setLayoutParams(lp);
         return rootview;
     }
 
@@ -62,6 +81,8 @@ public class ProfileFragment extends Fragment {
         mapBtn = (ImageView) getView().findViewById(R.id.mapBtn);
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
+
+        my_score = (TextView) getView().findViewById(R.id.my_score);
         db = FirebaseFirestore.getInstance();
         if(!mLocationPermissionGranted){
             getLocationPermission();
@@ -98,6 +119,24 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        setScore();
+    }
+
+    private void setScore(){
+        DocumentReference dr = db.collection("UserCollection").document(MainActivity.currentUser.getUid());
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                long score = documentSnapshot.getLong("totalPoints");
+                my_score.setText("Total Points: " + score);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public static int getWidth(Context mContext){
