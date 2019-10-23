@@ -90,7 +90,7 @@ public class ItemActivity extends AppCompatActivity {
                                     else{
                                         new AlertDialog.Builder(ItemActivity.this)
                                                 .setTitle("warn")
-                                                .setMessage("You don't have enough points to buy it!").setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                                                .setMessage("You don't have enough points to redeem it!").setNegativeButton("ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int which) {
                                             }

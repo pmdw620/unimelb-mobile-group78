@@ -82,7 +82,7 @@ public class ItemAdapter extends BaseAdapter {
         Glide.with(context)
                 .load(item.getImgUrl())
                 .into(viewHolder.itemImage);
-        viewHolder.itemScore.setText("  Score:"+String.valueOf(item.getScore()));
+        viewHolder.itemScore.setText(" Points:"+String.valueOf(item.getScore()));
         viewHolder.gift.setImageResource(R.drawable.exchange);
         Log.d("db",String.valueOf(item.getScore()));
         return view;
