@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class ItemActivity extends AppCompatActivity {
         context = this;
         final Intent intent = getIntent(); // 取得从上一个Activity当中传递过来的Intent对象
         if (intent != null) {
-            String name = intent.getStringExtra("item");
+            final String name = intent.getStringExtra("item");
             TextView title = (TextView) findViewById(R.id.title);
             title.setText(name);
             final int item_score = Integer.parseInt(intent.getStringExtra("item_score"));
@@ -78,7 +79,8 @@ public class ItemActivity extends AppCompatActivity {
                                 if (document.exists()) {
                                     Log.d("test", "DocumentSnapshot data: " + document.getData());
                                     if (Integer.parseInt(document.getData().get("totalPoints").toString()) >= item_score){
-                                        firedb.collection("UserCollection").document(username).update("totalPoints",Integer.parseInt(document.getData().get("totalPoints").toString())-item_score);
+                                        firedb.collection("UserCollection").document(username).update("totalPoints",FieldValue.increment(-item_score));
+                                        firedb.collection("Items").document(name).update("current_number", FieldValue.increment(-1));
                                         new AlertDialog.Builder(ItemActivity.this)
                                                 .setTitle("Congratulations")
                                                 .setMessage("It's belong to you!").setNegativeButton("ok", new DialogInterface.OnClickListener() {

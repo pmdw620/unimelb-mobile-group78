@@ -21,7 +21,9 @@
         android:layout_width="280dp"
         android:layout_height="301dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -31,20 +33,26 @@
         android:layout_width="328dp"
         android:layout_height="104dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/large_img" />
 
     <ImageButton
         android:id="@+id/buy"
-        android:layout_width="232dp"
-        android:layout_height="74dp"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@drawable/redeem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/describe" />
 
@@ -54,10 +62,11 @@
         android:layout_height="62dp"
         android:background="@drawable/item_title"
         android:gravity="center"
-        android:text="TextView"
         android:scaleType="fitXY"
+        android:text="TextView"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
