@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText loginPwd;
     public static FirebaseAuth mAuth;
     public static FirebaseUser currentUser;
+    private FirebaseFirestore firedb;
 
     List<Fragment> mFragments;
     private int lastIndex;
@@ -156,6 +157,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         final FirebaseFirestore firedb = FirebaseFirestore.getInstance();
         final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        long time=System.currentTimeMillis();
+        Date date=new Date(time);
+        SimpleDateFormat format=new SimpleDateFormat("E");
+        final String weekday = format.format(new Date());
+        Log.e("time","time6="+weekday);
+
         firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Map data = document.getData();
                         Long lastLogin = (Long) data.get("continueLogin");
                         String lastDate = data.get("lastLoginTime").toString();
+
                         if (lastDate.equals(currentDate)){
                             Log.d("test", "Same day!");
                         }
@@ -177,13 +185,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             SQLiteOpenHelper dbHelper = new TaskDBOpener(getApplicationContext());
                             SQLiteDatabase db = dbHelper.getWritableDatabase();
                             TaskDBModel updatetask = new TaskDBModel();
-
+                            Long weekpoints = (Long)data.get("currWeekPoints");
+                            Long totalpoints = (Long)data.get("totalPoints");
                             int id = 1;
                             db.update(TaskDBModel.TABLE_NAME, updatetask.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-
                             TextView tv = findViewById(R.id.todaypoints);
                             tv.setText("0");
-                            Toast.makeText(getApplicationContext(), "Congrats for a new day!", Toast.LENGTH_SHORT).show();
+                            if(weekday.contains("Wed")){
+                                firedb.collection("UserCollection").document(username).update("currWeekPoints",0);
+                                weekpoints = weekpoints-weekpoints;
+                            }
+                            if (lastLogin%5==0){
+                                firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints+5);
+                                weekpoints = weekpoints+5;
+                                firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints+5);
+                                Toast.makeText(getApplicationContext(), "Login "+lastLogin+" ! Earned extra 5 points", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Congrats for a new day! You have continued logged in for " + lastLogin + " day(s)！", Toast.LENGTH_LONG).show();
+                            }
+                            Log.d("testtestestetst", weekpoints.toString());
+                            TextView wp = findViewById(R.id.weekpoints);
+                            wp.setText(weekpoints.toString());
                         }
 
                     } else {
@@ -271,10 +294,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+    private void updatefirebase (){
+        final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firedb = FirebaseFirestore.getInstance();
+        firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("test", "DocumentSnapshot data: " + document.getData());
+                        Map data = document.getData();
+                        Long weekpoints = (Long)data.get("currWeekPoints")+1;
+                        System.out.println(weekpoints);
+                        Long totalpoints = (Long)data.get("totalPoints")+1;
+                        System.out.println(totalpoints);
+                        firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
+                        firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
+                    } else {
+                        Log.d("test", "No such document");
+                    }
+                } else {
+                    Log.d("test", "get failed with ", task.getException());
+                }
+            }
+        });
+    }
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
+                if (((msg.arg1+initstepcount)/1000)>(currentstep/1000) &&(msg.arg1+initstepcount<=10000) ){
+                    updatefirebase();
+                }
                 currentstep= msg.arg1+initstepcount;
                 View view = mFragments.get(1).getView();
                 textView.setText( currentstep+ "");
@@ -295,18 +347,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sqlDatabase.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
 
-//                if ((res)<10000){
-//
-//                    bnp.setProgress(res/100);
-//
-//                }
-//                else {
-//                    bnp.setProgress(100);
-//                }
+
                 if(view!=null){
                     TextView a = (TextView)mFragments.get(1).getView().findViewById(R.id.bushu);
                     bnp = (NumberProgressBar)mFragments.get(1).getView().findViewById(R.id.pb_update_progress);
-                    a.setText("step"+currentstep + "");
+                    a.setText("Current steps Today :"+ currentstep);
 
                     if (currentstep<10000){
                         bnp.setProgress(currentstep/100);

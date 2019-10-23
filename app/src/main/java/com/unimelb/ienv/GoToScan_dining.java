@@ -129,6 +129,8 @@ public class GoToScan_dining extends AppCompatActivity {
                 task.setDining(Math.min(8,dining+value));
                 task.setQuiz(quiz);
                 task.setWalk(walk);
+                int curValue = (Math.min(8,dining1+value)-dining1);
+                Toast.makeText(this, "You have earned "+ curValue + " point(s)", Toast.LENGTH_SHORT).show();
                 db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//output data
                 final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
