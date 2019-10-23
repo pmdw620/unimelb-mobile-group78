@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -156,6 +157,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         final FirebaseFirestore firedb = FirebaseFirestore.getInstance();
         final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        long time=System.currentTimeMillis();
+        Date date=new Date(time);
+        SimpleDateFormat format=new SimpleDateFormat("E");
+        final String weekday = format.format(new Date());
+        Log.e("time","time6="+weekday);
+
         firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Map data = document.getData();
                         Long lastLogin = (Long) data.get("continueLogin");
                         String lastDate = data.get("lastLoginTime").toString();
+
                         if (lastDate.equals(currentDate)){
                             Log.d("test", "Same day!");
                         }
@@ -177,13 +185,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             SQLiteOpenHelper dbHelper = new TaskDBOpener(getApplicationContext());
                             SQLiteDatabase db = dbHelper.getWritableDatabase();
                             TaskDBModel updatetask = new TaskDBModel();
-
+                            Long weekpoints = (Long)data.get("currWeekPoints");
+                            Long totalpoints = (Long)data.get("totalPoints");
                             int id = 1;
                             db.update(TaskDBModel.TABLE_NAME, updatetask.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-
                             TextView tv = findViewById(R.id.todaypoints);
                             tv.setText("0");
-                            Toast.makeText(getApplicationContext(), "Congrats for a new day!", Toast.LENGTH_SHORT).show();
+                            if(weekday.contains("Wed")){
+                                firedb.collection("UserCollection").document(username).update("currWeekPoints",0);
+                                weekpoints = weekpoints-weekpoints;
+                            }
+                            if (lastLogin%5==0){
+                                firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints+5);
+                                weekpoints = weekpoints+5;
+                                firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints+5);
+                                Toast.makeText(getApplicationContext(), "Login "+lastLogin+" ! Earned extra 5 points", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Congrats for a new day! You have continued logged in for " + lastLogin + " day(s)！", Toast.LENGTH_LONG).show();
+                            }
+                            Log.d("testtestestetst", weekpoints.toString());
+                            TextView wp = findViewById(R.id.weekpoints);
+                            wp.setText(weekpoints.toString());
                         }
 
                     } else {
