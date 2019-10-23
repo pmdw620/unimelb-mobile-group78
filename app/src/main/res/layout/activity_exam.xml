@@ -20,22 +20,23 @@
         android:id="@+id/question"
         android:layout_width="358dp"
         android:layout_height="72dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="27dp"
         android:gravity="left"
         android:text="TextView"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_show" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="392dp"
+        android:layout_width="300dp"
         android:layout_height="151dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question">
@@ -56,7 +57,9 @@
             android:id="@+id/answerC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="RadioButton"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="272dp" />
 
         <RadioButton
             android:id="@+id/answerD"
@@ -67,25 +70,24 @@
 
     <ImageButton
         android:id="@+id/btn_previous"
-        android:layout_width="177dp"
+        android:layout_width="150dp"
         android:layout_height="72dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="220dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         app:srcCompat="@drawable/ic_quiz_previous" />
 
     <ImageButton
         android:id="@+id/btn_next"
-        android:layout_width="181dp"
+        android:layout_width="150dp"
         android:layout_height="71dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="220dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         app:srcCompat="@drawable/ic_quiz_next" />
 
     <TextView
