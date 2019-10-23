@@ -127,6 +127,7 @@ public class LeadingBoardFragment extends Fragment {
         }
         return height;
     }
+
     private void initList() {
         FirebaseFirestore firedb = FirebaseFirestore.getInstance();
         firedb.collection("UserCollection").orderBy("currWeekPoints", Query.Direction.DESCENDING).limit(5).get()
@@ -167,7 +168,10 @@ public class LeadingBoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        initList();
+        if(list.size()>1){
+            list.clear();
+            initList();
+        }
         String username= FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseFirestore firedb = FirebaseFirestore.getInstance();
         firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

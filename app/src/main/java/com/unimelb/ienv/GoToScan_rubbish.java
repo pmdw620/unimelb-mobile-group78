@@ -161,6 +161,8 @@ public class GoToScan_rubbish extends AppCompatActivity {
                 task.setQuiz(quiz);
                 task.setWalk(walk);
                 task.setRubbish(Math.min(5,rubbish+value));
+                int curValue = (Math.min(5,rubbish1+value)-rubbish1);
+                Toast.makeText(this, "You have earned "+ curValue + " point(s)", Toast.LENGTH_SHORT).show();
                 db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                 System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
                 final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();

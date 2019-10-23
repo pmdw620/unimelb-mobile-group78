@@ -32,6 +32,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 
 public class ProfileFragment extends Fragment {
 
@@ -51,7 +53,26 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         inflater1 = inflater;
         final View rootview = inflater.inflate(R.layout.fragment_profile, null);
+        int height = getHeight(getActivity());
+        int width = getWidth(getActivity());
+        avatar = rootview.findViewById(R.id.avatar);
+        LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
+        LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
+        LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) avatar.getLayoutParams();
+        lp.height = (int)(height/8);
+        avatar.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
+        lp.height = (int)(height/8);
+        linearLayout1.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
+        lp.height = height/8;
+        linearLayout2.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
+        lp.height = height/8;
+        linearLayout3.setLayoutParams(lp);
         return rootview;
+
     }
 
     @Override
@@ -76,6 +97,9 @@ public class ProfileFragment extends Fragment {
                     displayName.setText(name);
                     int avatarID = documentSnapshot.getLong("avatarId").intValue();
                     avatar.setImageResource(avatarID);
+                    int totalPoints = documentSnapshot.getLong("totalPoints").intValue();
+                    TextView scores = getView().findViewById(R.id.my_score);
+                    scores.setText("Your current credit points: " + totalPoints);
                 } else{
                     Toast.makeText(getContext(), "Document does not exist", Toast.LENGTH_SHORT).show();
                 }
@@ -98,6 +122,24 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    public void setScore(){
+        DocumentReference dr = db.collection("UserCollection").document(MainActivity.currentUser.getUid());
+        dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                int totalPoints = documentSnapshot.getLong("totalPoints").intValue();
+                TextView scores = getView().findViewById(R.id.my_score);
+                scores.setText("Your current credit points: " + totalPoints);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setScore();
     }
 
     public static int getWidth(Context mContext){

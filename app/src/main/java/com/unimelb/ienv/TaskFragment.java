@@ -153,6 +153,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        updateImage();
         SQLiteOpenHelper dbHelper = new TaskDBOpener(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         TaskDBModel task = new TaskDBModel();
