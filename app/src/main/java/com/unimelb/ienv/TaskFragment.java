@@ -110,6 +110,20 @@ public class TaskFragment extends Fragment {
             }
         });
 
+        quiz_go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quiz = getData()[2];
+                if(quiz >= 1){
+                    Toast.makeText(getContext(), "You have finished today's quiz", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(getActivity(), ExamActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         // quiz_go holder!!!!
     }
 
@@ -129,15 +143,17 @@ public class TaskFragment extends Fragment {
             walk = Integer.parseInt(cursor.getString(3));
             quiz = Integer.parseInt(cursor.getString(4));
         }
-        int returnNumber[] = new int[2];
+        int returnNumber[] = new int[3];
         returnNumber[0] = rubbish;
         returnNumber[1] = dining;
+        returnNumber[2] = quiz;
         return returnNumber;
     }
 
     public void updateImage(){
         int rubbish = getData()[0];
         int dining = getData()[1];
+        int quiz =getData()[2];
         if (rubbish>=5){
             ImageView image1 =getView().findViewById(R.id.rubbish_go);
             image1.setImageResource(R.drawable.gogrey);
@@ -146,7 +162,10 @@ public class TaskFragment extends Fragment {
         if (dining>=8){
             ImageView image1 =getView().findViewById(R.id.dining_go);
             image1.setImageResource(R.drawable.gogrey);
-
+        }
+        if (quiz >= 1){
+            ImageView image1 =getView().findViewById(R.id.quiz_go);
+            image1.setImageResource(R.drawable.gogrey);
         }
     }
 

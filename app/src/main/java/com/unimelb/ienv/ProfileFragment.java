@@ -106,6 +106,13 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        storeBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(),ShopActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void setScore(){
