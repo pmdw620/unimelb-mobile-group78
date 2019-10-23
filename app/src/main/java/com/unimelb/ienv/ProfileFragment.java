@@ -2,7 +2,6 @@ package com.unimelb.ienv;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
@@ -21,8 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,8 +41,6 @@ public class ProfileFragment extends Fragment {
     private TextView displayName;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
     private FirebaseFirestore db;
-    private boolean mLocationPermissionGranted = false;
-    private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1111;
 
 
     @Nullable
@@ -84,9 +79,6 @@ public class ProfileFragment extends Fragment {
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
         db = FirebaseFirestore.getInstance();
-        if(!mLocationPermissionGranted){
-            getLocationPermission();
-        }
 
         DocumentReference dr = db.collection("UserCollection").document(MainActivity.currentUser.getUid());
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -112,14 +104,6 @@ public class ProfileFragment extends Fragment {
                 Intent i = new Intent(getActivity(),MainActivity.class);
                 startActivity(i);
                 getActivity().finish();
-            }
-        });
-
-        mapBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MapsActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -169,36 +153,5 @@ public class ProfileFragment extends Fragment {
             height = display.getHeight();  // deprecated
         }
         return height;
-    }
-
-    private void getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            mLocationPermissionGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        mLocationPermissionGranted = false;
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mLocationPermissionGranted = true;
-                }
-            }
-        }
     }
 }
