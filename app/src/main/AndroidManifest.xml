@@ -67,7 +67,7 @@
         <activity android:name=".ForgotPwdActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".yindaoactivity" />
+        <activity android:name=".GuideActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
