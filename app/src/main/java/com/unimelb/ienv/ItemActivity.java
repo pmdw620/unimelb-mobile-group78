@@ -86,6 +86,7 @@ public class ItemActivity extends AppCompatActivity {
                                                 .setMessage("It's belong to you!").setNegativeButton("ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int which) {
+                                                finish();
                                             }
                                         }).show();
                                     }
@@ -95,6 +96,7 @@ public class ItemActivity extends AppCompatActivity {
                                                 .setMessage("You don't have enough points to redeem it!").setNegativeButton("ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int which) {
+                                                finish();
                                             }
                                         }).show();
                                     }

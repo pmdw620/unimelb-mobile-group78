@@ -14,7 +14,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_quiz" />
+        app:srcCompat="@drawable/ic_quiz"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
 
     <TextView
         android:id="@+id/question"
@@ -26,6 +28,8 @@
         android:gravity="left"
         android:text="TextView"
         android:textSize="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_show" />

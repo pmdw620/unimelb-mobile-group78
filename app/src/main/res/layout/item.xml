@@ -22,6 +22,7 @@
                 android:layout_height="50dp"
                 android:gravity="center_vertical|left"
                 android:paddingLeft="15dp"
+
                 android:text="TextView"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -60,6 +61,7 @@
             android:id="@+id/item_img"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 

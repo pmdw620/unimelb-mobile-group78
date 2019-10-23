@@ -82,6 +82,7 @@ public class ShopActivity extends AppCompatActivity {
         });
 
     }
+
     private void initDatas() {
         db = FirebaseFirestore.getInstance();
         db.collection("Items").whereGreaterThan("current_number",0).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -105,14 +106,9 @@ public class ShopActivity extends AppCompatActivity {
     }
     public void onResume() {
         super.onResume();
-        if(datas.size()>1){
-            datas.clear();
-            initDatas();
-        }
+        final TextView score = (TextView) findViewById(R.id.user_score);
         String username= FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseFirestore firedb = FirebaseFirestore.getInstance();
-        final TextView score = (TextView) findViewById(R.id.user_score);
-        score.getBackground().setAlpha(0);
         firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

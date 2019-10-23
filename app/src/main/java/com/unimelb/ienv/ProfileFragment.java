@@ -120,6 +120,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        storeBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(),ShopActivity.class);
+                startActivity(i);
+            }
+        });
+
         setScore();
     }
 
@@ -137,6 +144,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        setScore();
     }
 
     public static int getWidth(Context mContext){

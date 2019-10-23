@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:my="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/task_background">
@@ -262,10 +263,10 @@
         android:id="@+id/stepcountbackground"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="0dp"
         android:fontFamily="@font/cousine"
         app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bushu"
         app:srcCompat="@drawable/group" />
@@ -276,14 +277,14 @@
         style="@style/NumberProgressBar_Green"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="125dp"
 
+        android:layout_marginTop="140dp"
         android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toTopOf="@+id/stepcountbackground"
         my:layout_constraintEnd_toEndOf="parent"
         my:layout_constraintStart_toStartOf="parent"
         my:progress_current="0" />
-
 
     <ImageView
         android:id="@+id/pig"

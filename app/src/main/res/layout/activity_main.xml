@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/regiBtn"
         android:layout_width="315dp"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="48dp"
@@ -27,7 +27,7 @@
     <EditText
         android:id="@+id/loginPwd"
         android:layout_width="315dp"
-        android:layout_height="51dp"
+        android:layout_height="45dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="48dp"
@@ -42,9 +42,9 @@
     <EditText
         android:id="@+id/loginEmail"
         android:layout_width="315dp"
-        android:layout_height="51dp"
+        android:layout_height="45dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="48dp"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
@@ -57,9 +57,9 @@
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="315dp"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="48dp"
         android:background="#A8E48F"
         android:text="LOGIN WITH EMAIL"
@@ -85,11 +85,11 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="7dp"
-        android:text="By continuing, you accept our Privacy Policy and Terms of Use."
+        android:text="By continuing, you accept our \nPrivacy Policy and Terms of Use."
         android:textColor="#669900"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
     <Button
         android:id="@+id/forgotBtn"
         android:layout_width="315dp"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="48dp"
@@ -113,7 +113,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="0dp"
+        android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="135dp"
         android:layout_marginEnd="136dp"
