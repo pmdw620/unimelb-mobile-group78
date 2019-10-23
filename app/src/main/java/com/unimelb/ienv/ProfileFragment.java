@@ -2,6 +2,7 @@ package com.unimelb.ienv;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,8 +32,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Text;
-
 
 public class ProfileFragment extends Fragment {
 
@@ -39,8 +40,11 @@ public class ProfileFragment extends Fragment {
     private ImageView storeBtn;
     private ImageView mapBtn;
     private TextView displayName;
+    private TextView my_score;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
     private FirebaseFirestore db;
+    private boolean mLocationPermissionGranted = false;
+    private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1111;
 
 
     @Nullable
@@ -67,7 +71,6 @@ public class ProfileFragment extends Fragment {
         lp.height = height/8;
         linearLayout3.setLayoutParams(lp);
         return rootview;
-
     }
 
     @Override
@@ -78,7 +81,12 @@ public class ProfileFragment extends Fragment {
         mapBtn = (ImageView) getView().findViewById(R.id.mapBtn);
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
+
+        my_score = (TextView) getView().findViewById(R.id.my_score);
         db = FirebaseFirestore.getInstance();
+        if(!mLocationPermissionGranted){
+            getLocationPermission();
+        }
 
         DocumentReference dr = db.collection("UserCollection").document(MainActivity.currentUser.getUid());
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -89,9 +97,6 @@ public class ProfileFragment extends Fragment {
                     displayName.setText(name);
                     int avatarID = documentSnapshot.getLong("avatarId").intValue();
                     avatar.setImageResource(avatarID);
-                    int totalPoints = documentSnapshot.getLong("totalPoints").intValue();
-                    TextView scores = getView().findViewById(R.id.my_score);
-                    scores.setText("Your current credit points: " + totalPoints);
                 } else{
                     Toast.makeText(getContext(), "Document does not exist", Toast.LENGTH_SHORT).show();
                 }
@@ -107,22 +112,24 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        storeBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent i = new Intent(getActivity(),ShopActivity.class);
-                startActivity(i);
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MapsActivity.class);
+                startActivity(intent);
             }
         });
+
+        setScore();
     }
 
-    public void setScore(){
+    private void setScore(){
         DocumentReference dr = db.collection("UserCollection").document(MainActivity.currentUser.getUid());
         dr.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                int totalPoints = documentSnapshot.getLong("totalPoints").intValue();
-                TextView scores = getView().findViewById(R.id.my_score);
-                scores.setText("Your current credit points: " + totalPoints);
+                long score = documentSnapshot.getLong("totalPoints");
+                my_score.setText("Total Points: " + score);
             }
         });
     }
@@ -130,7 +137,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setScore();
     }
 
     public static int getWidth(Context mContext){
@@ -160,5 +166,36 @@ public class ProfileFragment extends Fragment {
             height = display.getHeight();  // deprecated
         }
         return height;
+    }
+
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        mLocationPermissionGranted = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mLocationPermissionGranted = true;
+                }
+            }
+        }
     }
 }
