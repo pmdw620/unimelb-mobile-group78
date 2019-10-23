@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/gift" />
+                    tools:srcCompat="@drawable/exchange" />
 
                 <TextView
                     android:id="@+id/item_score"
