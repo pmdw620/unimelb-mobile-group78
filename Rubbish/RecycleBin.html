@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Recycle Bin</title>
+	<link rel="stylesheet" type="text/css" href="RecycleBin.css">
+	<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id = "header">
+		<h1>Welcome to</h1>
+		<h1>use recycle system!</h1>
+		<div id="line"></div>
+		<p>Please Select the recycle item</p>
+		<div style="margin-top:50px;">
+			<ul id = "recycleitem">
+				<li class = "item">
+					<button class = "itemButton" onclick="myFirstFunction()">Bottles</button>
+					<p class = "details" id = "firstDetails">Please enter the quantity:</br><input id = "firstDetailsText" type="text" name="quantity"></p>
+				</li>
+				<li class = "item">
+					<button class = "itemButton" onclick="mySecondFunction()">Papers</button>
+					<p class = "details" id = "secondDetails">
+					Please enter the weight:</br>
+						<input id = "secondDetailsText" type="text" name="quantity">
+					</p>
+				</li>
+				<li class = "item">
+					<button class = "itemButton" onclick="myThirdFunction()">metals</button>
+					<p class = "details" id = "thirdDetails">Please enter the weight:</br><input  id = "thirdDetailsText" type="text" name="quantity"></p>
+				</li>
+				<li><button id = "final" onclick="makeCode()">Submit</button></li>
+			</ul>
+
+			<div id="qrcode"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var currentItem = ""
+		var qrcode = new QRCode("qrcode");
+
+		function makeCode () {
+		    var elText = document.getElementById(currentItem+"Text");
+
+		    if (!elText.value) {
+		        alert("Input a text");
+		        elText.focus();
+		        return;
+		    }
+				var d = new Date();
+				var n = d.getTime();
+		    qrcode.makeCode(n + ' ' + elText.value);
+		}
+
+		function myFirstFunction(){
+			details1 = document.getElementById("firstDetails");
+			details1.style.display = "block";
+			details2 = document.getElementById("secondDetails");
+			details2.style.display = "none";
+			details3 = document.getElementById("thirdDetails");
+			details3.style.display = "none";
+			currentItem = "firstDetails";
+		}
+		function mySecondFunction(){
+			details1 = document.getElementById("firstDetails");
+			details1.style.display = "none";
+			details2 = document.getElementById("secondDetails");
+			details2.style.display = "block";
+			details3 = document.getElementById("thirdDetails");
+			details3.style.display = "none";
+			currentItem = "secondDetails";
+		}
+		function myThirdFunction(){
+			details1 = document.getElementById("firstDetails");
+			details1.style.display = "none";
+			details2 = document.getElementById("secondDetails");
+			details2.style.display = "none";
+			details3 = document.getElementById("thirdDetails");
+			details3.style.display = "block";
+			currentItem = "thirdDetails";
+		}
+
+	</script>
+</body>
+</html>

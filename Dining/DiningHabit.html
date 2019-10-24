@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dining Habit</title>
+	<link rel="stylesheet" type="text/css" href="DiningHabit.css">
+	<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id = "header">
+		<h1>Welcome to</h1>
+		<h1>use recycle system!</h1>
+		<div id="line"></div>
+		<p>Please Select the Items that A Customer Saves</p>
+		<div style="margin-top:40px;">
+			<ul id = "recycleitem">
+				<li class = "item">
+					<label for="cbox1">disposable tableware</label>
+					<input type="checkbox" id="cbox1" value="first_checkbox">
+				</li>
+				<li class = "item">
+					<label for="cbox2">plastic bag</label>
+					<input type="checkbox" id="cbox2" value="second_checkbox">
+				</li>
+				<li class = "item">
+					<label for="cbox3">to-go boxes</label>
+					<input type="checkbox" id="cbox3" value="third_checkbox">
+				</li>
+				<li class = "item">
+					<label for="cbox4">no food waste</label>
+					<input type="checkbox" id="cbox4" value="forth_checkbox">
+				</li>
+				<li><button id = "final" onclick="makeCode()">Submit</button></li>
+			</ul>
+
+			<div id="qrcode"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var qrcode = new QRCode("qrcode");
+
+		function makeCode () {
+			var check1 = document.getElementById('cbox1');
+			var check2 = document.getElementById('cbox2');
+			var check3 = document.getElementById('cbox3');
+			var check4 = document.getElementById('cbox4');
+			var count = 0;
+			if (check1.checked){
+				count++;
+			}
+			if(check2.checked){
+				count++;
+			}
+			if(check3.checked){
+				count++;
+			}
+			if(check4.checked){
+				count++;
+			}
+
+			var res=0;
+			switch(count){
+				case 0:
+					res = 0;
+					break;
+				case 1:
+					res = 1;
+					break;
+				case 2:
+					res = 3;
+					break;
+				case 3:
+					res = 5;
+					break;
+				case 4:
+					res = 8;
+					break;
+			}
+			var d = new Date();
+			var n = d.getTime();
+		  qrcode.makeCode(n+ ' ' + res);
+		}
+
+	</script>
+</body>
+</html>
