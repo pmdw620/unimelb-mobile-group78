@@ -1,0 +1,799 @@
+commit 14106eec25c6452e2368d901a5bf43d942a5afc2
+Author: LeiTian3 <52623193+leitian3@users.noreply.github.com>
+Date:   Thu Oct 24 18:28:45 2019 +1100
+
+    UI Design by Lei Tian
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit cb6276e27a5557a0964cdc7f7d3847f4586ad59e
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Thu Oct 24 18:25:54 2019 +1100
+
+    Testing Webpages
+    For simulating Restaurant and Rubbish Bin Award System
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 1410191d455f5d5523b22090b68e6ad0d201b106
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Thu Oct 24 18:14:34 2019 +1100
+
+    final test2
+
+commit b2b2c0f28945f69bb282e37d3906654f36341281
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Thu Oct 24 18:10:40 2019 +1100
+
+    final test1
+
+commit b7d494beba22c707df77a3e9df0bb3b362510011
+Merge: 93b9e84 df546cf
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Thu Oct 24 17:31:58 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 93b9e84944bf8976c140918c064a1118da12f417
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Thu Oct 24 17:03:58 2019 +1100
+
+    changed
+    
+    Signed-off-by: Ruoyu Niu <402540052@qq.com>
+
+commit df546cf3f42d8d5243d010cdc3eab70a5a741a54
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Thu Oct 24 17:03:58 2019 +1100
+
+    changed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 6babd41ff49197f32d77b6c7500def52194c409f
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Thu Oct 24 16:52:40 2019 +1100
+
+    changed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 475a15daccd5538f2ed78568785015dc9ab9558c
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 23:56:52 2019 +1100
+
+    ui changed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit a66dcb1fbb796bbe1d8aad48d4083124b76ecb46
+Merge: 9c12960 d9d32ae
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 22:54:18 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit d9d32ae33f70d993b9c74fbb89be99b2c62b5b66
+Author: 402540052 <42630374+402540052@users.noreply.github.com>
+Date:   Wed Oct 23 22:47:24 2019 +1100
+
+    Add files via upload
+
+commit 9c12960998d4b1aad597dd462965717817b20745
+Merge: 34b410e 7ce7273
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 22:43:00 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 7ce727314d8b3563157e10d858e484dbdc18e348
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Wed Oct 23 22:28:45 2019 +1100
+
+    profile fragment updated
+
+commit 34b410ed1884e68c007325bd645ac04fd5d9a796
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 22:24:09 2019 +1100
+
+    profile fragment updated
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit fed2bc6375f07e0f1551c91d52bf2dbe32503b33
+Merge: 69a107a b3fc272
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 22:05:47 2019 +1100
+
+    Merge branch 'master' of github.com:pmdw620/unimelb-mobile-group78 into Ruoyu_Niu
+
+commit 69a107aba96171c0d089e98480ae51bc56fc90e6
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 22:05:10 2019 +1100
+
+    second test
+
+commit b3fc2723b2202e196e8607b5a0ce39c592f0e3a3
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 21:53:40 2019 +1100
+
+    fix guide, task pages layout
+
+commit ee27d5d7e28713d4cf65d51bcaf2b64cb6137966
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 21:30:30 2019 +1100
+
+    fix guide page activity
+
+commit f7f7fb4bf5a122e7011adb322072f7e6fae24a62
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 20:25:05 2019 +1100
+
+    second test
+
+commit abf639b0344718f5828510ef927644fd0e51d584
+Merge: b0031ac 3574194
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 20:21:35 2019 +1100
+
+    Merge branch 'master' of github.com:pmdw620/unimelb-mobile-group78 into Ruoyu_Niu
+
+commit b0031acfc8863c20813823a3f757b6f3bee6da81
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 20:18:17 2019 +1100
+
+    second test
+
+commit 13455994d39f9334805429318e67522b20d2bce0
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 20:05:09 2019 +1100
+
+    second test
+
+commit b92ae2eb44beafe789a635ebf2d1c6ed27ca8106
+Author: 402540052 <402540052@qq.com>
+Date:   Wed Oct 23 19:59:44 2019 +1100
+
+    first test
+
+commit 357419458c4665d5dd1ebe875c6739507d5a8452
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 19:21:15 2019 +1100
+
+    add guidepage
+
+commit ca3c4a7fb06c1ca87d584d85917283113cd05254
+Merge: fb92c80 6395290
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 18:25:38 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit fb92c802304d09dc8336082ee95af8f034f059bd
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 18:25:16 2019 +1100
+
+    bug fixed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 6395290900b8c623afc1e31d3f84a3b504bf21ad
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Wed Oct 23 11:38:43 2019 +1100
+
+    task fregment and profile
+
+commit 6511c8dcc8015e5f082406885195c3b96cbe803d
+Author: 402540052 <42630374+402540052@users.noreply.github.com>
+Date:   Wed Oct 23 03:42:49 2019 +1100
+
+    Add files via upload
+
+commit af1550bdc98c3ccaf5e807dc2bba6d8b9945b7c8
+Author: 402540052 <42630374+402540052@users.noreply.github.com>
+Date:   Wed Oct 23 03:40:57 2019 +1100
+
+    Add files via upload
+
+commit 51e9f5581907e275f3d9b7cb5db61684dab480f4
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 03:08:57 2019 +1100
+
+    login ui slightly changed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 46b6f8d90dc92910042baf2f96d9805f632f7fb1
+Merge: 0c7212f 6e9a7a6
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 03:02:52 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/unimelb/ienv/ProfileFragment.java
+    #       app/src/main/res/layout/test.xml
+
+commit 0c7212f4038c1271e56c1d70d55dd7dada50c758
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 03:01:23 2019 +1100
+
+    maps implementation completed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 6e9a7a6ccbe5bedaab6e4fba61c556f7383a157e
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 02:25:42 2019 +1100
+
+    add firebase update for step counting
+
+commit 6c6dcc571ab297cd8ab16c7fb053ea4af25a0b7a
+Merge: ec865c9 c864ad1
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 02:03:09 2019 +1100
+
+    Merge branch 'master' of https://github.com/pmdw620/unimelb-mobile-group78 into Shuohang
+    
+    # Conflicts:
+    #       app/src/main/java/com/unimelb/ienv/TaskFragment.java
+
+commit c864ad145cbafd16e96e74da8a1f5116a7d6049f
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Wed Oct 23 02:00:16 2019 +1100
+
+    fix errorsss
+
+commit ec865c99895bb2f1c69e48d085228e03a5010e3d
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 01:56:16 2019 +1100
+
+    add today score to task layout
+
+commit ee094061aa76c12d933443aa0e462a77adf2f71e
+Merge: 465376b c800225
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 01:44:25 2019 +1100
+
+    Merge branch 'master' of https://github.com/pmdw620/unimelb-mobile-group78 into Shuohang
+    
+    # Conflicts:
+    #       app/src/main/java/com/unimelb/ienv/TaskFragment.java
+    #       app/src/main/res/layout/fragment_task.xml
+
+commit ae97b49545803fe80efb7418958dbecc4c09c469
+Merge: 2ac5a9b c800225
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 01:22:44 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 2ac5a9bdcace76af7924b2f42f76b259a74fcb3e
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Wed Oct 23 01:22:39 2019 +1100
+
+    Merge branch 'master' of /Users/mppan/Desktop/unimelb-mobile-group78 with conflicts.
+
+commit c800225a00574e60c0d2fb946f2e9286cf928d5e
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Wed Oct 23 01:21:46 2019 +1100
+
+    fix errors
+
+commit 465376b2a422b361991dde92068695d1569187bf
+Author: yaokk <yaowg539@gmail.com>
+Date:   Wed Oct 23 01:19:12 2019 +1100
+
+    change font and task fragment layout
+
+commit a0fbff42603448c1e1f1ade704aabc01c34c9db3
+Merge: c99561c 27439bd
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Wed Oct 23 01:07:38 2019 +1100
+
+    alliswell
+
+commit c99561cf88335eda080860d177fac70c75d8cede
+Merge: 87d72ae 465949a
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Wed Oct 23 01:03:36 2019 +1100
+
+    dfddf
+
+commit 465949a69fdfdaccbdd2e857b12f514093b7f6eb
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Wed Oct 23 00:58:15 2019 +1100
+
+    profile ui
+
+commit 27439bd970a5f711224210db9fff1594ca2b2695
+Merge: 731426d 9fb5202
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Wed Oct 23 00:32:47 2019 +1100
+
+    Merge branch 'master' of https://github.com/pmdw620/unimelb-mobile-group78
+
+commit 731426daa93377a99a422343dbdaa3677817530a
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Wed Oct 23 00:32:26 2019 +1100
+
+    update everyday sqlite database
+
+commit 9fb52023d82e12bd2eac3bcd9c8e5f3ffba4f536
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 23:27:23 2019 +1100
+
+    reverse bug fix
+
+commit 9fb93273f7cc4dea65ae14b1c58025954a3856f4
+Merge: 618bae6 94a4d00
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 23:21:50 2019 +1100
+
+    Merge branch 'master' of https://github.com/pmdw620/unimelb-mobile-group78 into Shuohang
+    
+    # Conflicts:
+    #       app/src/main/java/com/unimelb/ienv/TaskFragment.java
+
+commit 618bae66d48b9dc992cff0cc34d3a685c2947325
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 23:17:47 2019 +1100
+
+    fix task fragment layout
+
+commit 4cbe83fb557afc47022be411b0c14bbae0d25749
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 23:05:02 2019 +1100
+
+    mybranch
+
+commit 87d72ae0298a97fac9f5d4dde74d869c85756c66
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 22:57:52 2019 +1100
+
+    mybranch
+
+commit 459a3a1cf92412fceb75c05db9fc3a16149eb12c
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 18:44:31 2019 +1100
+
+    bugs fix
+
+commit 815a910207866868fd5210a7d9f2f3eb59b872a3
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 18:35:46 2019 +1100
+
+    new icons
+
+commit 7bb1f3dbf7cf598c0d5fe68a9fdb113c9d4fbc72
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 18:50:26 2019 +1100
+
+    add task fragment
+
+commit d4a2623770e89f389b94eb2852e021ce79b66158
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 18:31:31 2019 +1100
+
+    change solution of fragment management
+
+commit 94a4d00f63e547d584b685d2e4901d39bbcbff51
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Tue Oct 22 22:57:05 2019 +1100
+
+    add onresume method
+
+commit 0e2bc9a165960b9fba2d8d2892f78f41ea23276d
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 21:56:42 2019 +1100
+
+    fix view bug
+
+commit 20e8ad9fca27c097326b57a0bcfe06f6f1fc6de1
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 21:32:45 2019 +1100
+
+    bugs fixed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 561b0b3d786e159d19bad5f0aab6bac5b457507b
+Merge: f646a57 ee7c15f
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 21:07:52 2019 +1100
+
+    mybranch
+
+commit f646a57b3221fb3e4b269cb603850d7fca204e11
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 20:51:51 2019 +1100
+
+    mybranch
+
+commit ee7c15fd0a2d2865afa4fab0e324288c0187d936
+Merge: 52dc0be 67a2d74
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 18:51:05 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 52dc0be5f536f085ac4d0d3b37fbbeb1a1229dc9
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 18:50:26 2019 +1100
+
+    add task fragment
+
+commit 67a2d7425085c1c0ed29fe37b6cba39c0214c898
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 18:44:31 2019 +1100
+
+    bugs fix
+
+commit 53f39bbe7530c04d9deace9cd5d22441f61b2023
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 18:38:09 2019 +1100
+
+    task ui
+
+commit 2a33e3351a50d42ef52d14d3d8a7332c0b2f675d
+Merge: 64da6db 1179e1b
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 18:36:04 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 64da6db7f50dc25dd3dc23386defbbae8b991413
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 18:35:46 2019 +1100
+
+    new icons
+
+commit 1179e1b43c6e271aed1d34764cbbef329b59a2ff
+Merge: f927a8a 9a1c12b
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 18:32:38 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit f927a8a8f415e1db613b606ce001fbbff7039715
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 18:31:31 2019 +1100
+
+    change solution of fragment management
+
+commit 8797c02d72e532b5a147e0560f194d632eebdbf5
+Merge: 1a062f8 9a1c12b
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 18:26:18 2019 +1100
+
+    Merge remote-tracking branch 'origin/master' into Shuohang
+    
+    # Conflicts:
+    #       app/build.gradle
+    #       app/libs/core-3.0.0.jar
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/unimelb/ienv/GoToScan_dining.java
+    #       app/src/main/java/com/unimelb/ienv/GoToScan_rubbish.java
+    #       app/src/main/java/com/unimelb/ienv/MainActivity.java
+    #       app/src/main/java/com/unimelb/ienv/TaskDBModel.java
+    #       app/src/main/java/com/unimelb/ienv/TaskDBOpener.java
+    #       app/src/main/java/com/unimelb/ienv/TaskFragment.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/BeepManager.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/CaptureActivity.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/CaptureActivityHandler.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/FinishListener.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/InactivityTimer.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/IntentSource.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/Intents.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/android/PreferencesActivity.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/camera/AutoFocusManager.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/camera/CameraConfigurationManager.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/camera/CameraConfigurationUtils.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/camera/CameraManager.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/camera/OpenCameraInterface.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/camera/PreviewCallback.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/decode/DecodeFormatManager.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/decode/DecodeHandler.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/decode/DecodeThread.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/encode/CodeCreator.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/view/ViewfinderResultPointCallback.java
+    #       app/src/main/java/com/unimelb/ienv/zxing/view/ViewfinderView.java
+    #       app/src/main/res/drawable-hdpi/btn_back_normal.png
+    #       app/src/main/res/drawable-hdpi/btn_back_press.png
+    #       app/src/main/res/drawable-hdpi/ic_launcher.png
+    #       app/src/main/res/drawable-hdpi/scan_light.png
+    #       app/src/main/res/drawable/selector_capture_back.xml
+    #       app/src/main/res/drawable/selector_main_button.xml
+    #       app/src/main/res/drawable/shape_main_button.xml
+    #       app/src/main/res/drawable/shape_main_edit.xml
+    #       app/src/main/res/drawable/shape_main_imageview.xml
+    #       app/src/main/res/drawable/shape_main_title.xml
+    #       app/src/main/res/layout/activity_go_to_scan_dining.xml
+    #       app/src/main/res/layout/activity_go_to_scan_rubbish.xml
+    #       app/src/main/res/layout/capture.xml
+    #       app/src/main/res/layout/fragment_task.xml
+    #       app/src/main/res/raw/beep.ogg
+    #       app/src/main/res/values/colors.xml
+    #       app/src/main/res/values/ids.xml
+    #       app/src/main/res/values/strings.xml
+    #       app/src/main/res/values/styles.xml
+
+commit 1a062f85e53829936cec55a229a9dc70cb383b7c
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 18:21:36 2019 +1100
+
+    mybranch
+
+commit 9a1c12b03f5d087639ff09264550d4521ec641e3
+Merge: c302157 60150d1
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Tue Oct 22 18:18:59 2019 +1100
+
+    commit
+
+commit 741f6ba190512e4d6cf0b6aef5733794dfd5137d
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 18:18:24 2019 +1100
+
+    mybranch
+
+commit 60150d1df4814df448cdd8b96ffd2d19b7fec8b1
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Tue Oct 22 17:44:24 2019 +1100
+
+    finish homepage
+
+commit c302157ca0311901a44ae6667f36213f5e2d3187
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 14:20:39 2019 +1100
+
+    bug fixed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit b6dcb7addf173babe598422bffeaf4e6361ed85f
+Merge: d8704da 1f5ee28
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 13:25:46 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit d8704da8a6b4e6d74dc965ba7c17ba185715b5cf
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 13:25:24 2019 +1100
+
+    bug fixed
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 85f708f1b85a945a27d8562562950c038a0e94e2
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Tue Oct 22 02:29:26 2019 +1100
+
+    mybranch
+
+commit 1f5ee2820c65fcbd5d49e47c6d26a3d5532adc1f
+Merge: 21afc25 53bbd31
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 02:01:16 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 21afc255ad85e487dac022925c43b53a5b6e1e78
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 02:00:52 2019 +1100
+
+    add uncommit files
+
+commit 53bbd3143a7ef17f73981fef3a8e1fbb91686516
+Merge: 3353886 e0f11e8
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 01:41:24 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/java/com/unimelb/ienv/MainActivity.java
+    #       app/src/main/res/layout/fragment_task.xml
+
+commit 3353886f5ada03c8796a261503587270d5bbeb9d
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Tue Oct 22 01:40:50 2019 +1100
+
+    avatar added, some faulty code has been commented.
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit e0f11e8e68021226f9b3ebac98a0ad16eb514acb
+Merge: f0cb94c 088ed02
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 00:35:36 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit f0cb94c05e2266e5fa0e0f6083e43e50cc305fe4
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Oct 22 00:35:12 2019 +1100
+
+    fix bugs in step count and number progressbar
+
+commit 088ed02955b0ec6515f6027d7c149f52d60ed551
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 21 23:25:07 2019 +1100
+
+    Avatars
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit f07f5cc5ce7e0a952c7b17c6eced48ebd22a077b
+Merge: 752d763 abad17b
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 21 23:22:41 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 752d7630a17a9df85da2bdcbe723eac9a1677d73
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 21 23:22:15 2019 +1100
+
+    UI Only
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit abad17b775d40162ae4558f943d5f128b2fe4a32
+Author: yaokk <yaowg539@gmail.com>
+Date:   Mon Oct 21 22:15:16 2019 +1100
+
+    add NumberProgressBar
+
+commit dc0e1fc5205cf15dc23de87e894dbf0ca2b52956
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Mon Oct 21 21:25:30 2019 +1100
+
+    mybranch
+
+commit cbc50f163571c2ae06543f39dfdcf44c64453aec
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Mon Oct 21 20:39:03 2019 +1100
+
+    mybranch
+
+commit 542badeaeb11292ebef9a2537f2682cfcfd700a8
+Merge: faf13fd b9d925a
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 21 18:19:53 2019 +1100
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/res/layout/fragment_leadingboard.xml
+
+commit faf13fdefb040ed5406b5be963e3d0e13f3d4079
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 21 14:18:12 2019 +1100
+
+    Login page ui
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit b9d925ad8f4d0e2dc9558ef82c74338fdd027ce5
+Author: yaokk <yaowg539@gmail.com>
+Date:   Mon Oct 21 17:47:34 2019 +1100
+
+    use sqlite for step count service and fix bug
+
+commit 00c0f539384b743aef48f6635eb02fb2cabd35d8
+Author: yaokk <yaowg539@gmail.com>
+Date:   Mon Oct 21 16:07:16 2019 +1100
+
+    add step_count service
+
+commit 0a60df13118160d894ad0e65c35b8a85e0a96229
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Mon Oct 21 16:02:10 2019 +1100
+
+    finish leader board
+
+commit 93b2631fe7aa6e7467243c5427f48a52af7d0dd2
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Mon Oct 21 14:18:12 2019 +1100
+
+    update leaderboard
+
+commit 77054417abfea81679567ab33222c9cb75087f97
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Mon Oct 21 11:23:28 2019 +1100
+
+    database updating
+
+commit 8f1165c2372ded2a3fa3304fb4db0de67d391239
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Sun Oct 20 16:53:41 2019 +1100
+
+    mybranch
+
+commit f9165c325d980eb1d6e55d348dc02000b9affcbe
+Author: hushuohang <hushuohang@gmail.com>
+Date:   Sun Oct 20 16:35:07 2019 +1100
+
+    database updating
+
+commit eef004b22cc63acd41b011996348e8f5c978681f
+Merge: 9ef6faf 57113bb
+Author: 胡硕航 <hushuohang@hushuohangdeMacBook-Air.local>
+Date:   Sun Oct 20 15:12:39 2019 +1100
+
+    Merge remote-tracking branch 'origin/Changlin' into Changlin
+    
+    # Conflicts:
+    #       app/src/main/java/com/unimelb/ienv/MainActivity.java
+
+commit 9ef6fafc8e4c84f28b82927abf26677f8fdd8cd7
+Author: 胡硕航 <hushuohang@hushuohangdeMacBook-Air.local>
+Date:   Sun Oct 20 15:12:31 2019 +1100
+
+    Merge branch 'Changlin' of /Users/hushuohang/AndroidStudioProjects/unimelb-mobile-group78 with conflicts.
+
+commit 57113bb6420f0ea2d468c553a4c7c553524ab2b7
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Sun Oct 20 15:11:29 2019 +1100
+
+    add database
+
+commit d6e3f3b708f2e85c1278e039b18cecb97a3ec6a7
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Sat Oct 19 20:30:42 2019 +1100
+
+    add two scan file
+
+commit 2cc9451351666d74a7683de034e722016243f27a
+Author: lin chang <chang.lin@student.unimelb.edu.au>
+Date:   Sat Oct 19 17:53:35 2019 +1100
+
+    add the scanxing
+
+commit 04f3c25dfcc067508c65319579b7dc87ed943f81
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 14 14:15:52 2019 +1100
+
+    change
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 463be1fe6cc178a3bc20067dce2293f2ff59b0ed
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Mon Oct 14 13:37:25 2019 +1100
+
+    Layout structure completed, Logout function not completed yet
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 0960dc98ae74a29bfca00bc6233e360105f62160
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Sun Oct 13 15:43:32 2019 +1100
+
+    fragment management
+    
+    Signed-off-by: Ming Pan <pmdw620@gmail.com>
+
+commit 56c5e22db2730b45abdfb7912444ced00d877171
+Author: LeiTian3 <52623193+LeiTian3@users.noreply.github.com>
+Date:   Thu Sep 26 00:15:08 2019 +1000
+
+    Add files via upload
+    
+    48 eco quiz
+    序号/t题目/t选项/t答案/t
+
+commit 9929ade0322c70789570e00f91106f980626a1ff
+Author: yaokk <yaowg539@gmail.com>
+Date:   Tue Sep 24 13:29:50 2019 +1000
+
+    add stepCount activity 当前版本程序不关可一直记步
+
+commit 59d61d77bdd79aeb5343de2e95a0941cd4c9db4d
+Author: Ming Pan <pmdw620@gmail.com>
+Date:   Thu Sep 19 19:19:57 2019 +1000
+
+    First Commit
