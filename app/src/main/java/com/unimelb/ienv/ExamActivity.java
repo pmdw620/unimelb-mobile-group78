@@ -196,8 +196,19 @@ public class ExamActivity<count> extends AppCompatActivity {
                     tv_question.setText(q.question);
                     radioButtons[0].setText(q.answerA);
                     radioButtons[1].setText(q.answerB);
-                    radioButtons[2].setText(q.answerC);
-                    radioButtons[3].setText(q.answerD);
+                    if (q.answerC != null){
+                        radioButtons[2].setText(q.answerC);
+                    }
+                    else{
+                        radioButtons[2].setVisibility(View.INVISIBLE);
+                    }
+                    if (q.answerD != null){
+                        radioButtons[3].setText(q.answerD);
+                    }
+                    else{
+                        radioButtons[3].setVisibility(View.INVISIBLE);
+                    }
+                    location.setText("     Location: "+(current+1)+"/5");
 
 
                     radioGroup.clearCheck();
@@ -218,7 +229,6 @@ public class ExamActivity<count> extends AppCompatActivity {
                         break;
                     }
                 }
-
             }
         });
     }
@@ -271,16 +281,16 @@ public class ExamActivity<count> extends AppCompatActivity {
                     }
                     q.selectedAnswer = -1;
                     if (q.explaination.equals("A")) {
-                        q.answer = 1;
+                        q.answer = 0;
 
                     } else if (q.explaination.equals("B")) {
-                        q.answer = 2;
+                        q.answer = 1;
 
                     } else if (q.explaination.equals("C")) {
-                        q.answer = 3;
+                        q.answer = 2;
 
                     } else {
-                        q.answer = 4;
+                        q.answer = 3;
                     }
                     question_list.add(q);
                 }

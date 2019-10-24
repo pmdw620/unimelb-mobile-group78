@@ -39,6 +39,9 @@
             android:name=".ItemActivity"
             android:label="@string/title_activity_item"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".OrderActivity"
+            android:label="orderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ExamActivity"
             android:label="@string/title_activity_exam"

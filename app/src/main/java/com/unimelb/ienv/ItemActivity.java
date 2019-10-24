@@ -7,10 +7,13 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,9 +30,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ItemActivity extends AppCompatActivity {
     private static ItemActivity context;
-    private int score;
+    private String url ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ public class ItemActivity extends AppCompatActivity {
                             Glide.with(context)
                                     .load(document.getData().get("largeimg").toString())
                                     .into(largeimg);
+                            url = document.getData().get("imgUrl").toString();
                             describe.setText(document.getData().get("describe").toString());
                         } else {
                             Log.d("test", "No such document");
@@ -86,7 +93,25 @@ public class ItemActivity extends AppCompatActivity {
                                                 .setMessage("It's belong to you!").setNegativeButton("ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int which) {
-                                                finish();
+                                                Map<String, Object> order = new HashMap<>();
+                                                String username = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                order.put("item_name", name);
+                                                order.put("user", username);
+                                                order.put("item_url", url);
+                                                firedb.collection("Order").add(order)
+                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentReference documentReference) {
+                                                                Log.d("db", "DocumentSnapshot written with ID: " + documentReference.getId());
+                                                                finish();
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.w("db", "Error adding document", e);
+                                                            }
+                                                        });
                                             }
                                         }).show();
                                     }

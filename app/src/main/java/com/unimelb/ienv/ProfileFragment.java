@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private ImageView logoutBtn;
     private ImageView storeBtn;
     private ImageView mapBtn;
-    private ImageView itemBtn;
+    private ImageView historyBtn;
     private TextView displayName;
     private TextView my_score;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
@@ -84,7 +84,7 @@ public class ProfileFragment extends Fragment {
         logoutBtn = (ImageView) getView().findViewById(R.id.logoutBtn);
         storeBtn = (ImageView) getView().findViewById(R.id.storeBtn);
         mapBtn = (ImageView) getView().findViewById(R.id.mapBtn);
-        itemBtn = (ImageView)getView().findViewById(R.id.itemBtn) ;
+        historyBtn = (ImageView)getView().findViewById(R.id.itemBtn) ;
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
 
@@ -133,10 +133,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        itemBtn.setOnClickListener(new View.OnClickListener(){
+        historyBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-//               Intent i = new Intent(getActivity(),ShopActivity.class);
-//               startActivity(i);
+               Intent i = new Intent(getActivity(),OrderActivity.class);
+               startActivity(i);
             }
         });
 

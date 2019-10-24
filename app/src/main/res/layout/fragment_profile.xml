@@ -142,7 +142,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/profile_nearby" />
+            android:src="@drawable/shopinghistory" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:text="View Purchased Items"
+                android:text="View Redeemed Items"
                 android:textAllCaps="false"
                 android:textSize="19sp"
                 android:typeface="sans"
@@ -219,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:text="Go To Nearby Shops"
+                android:text="Nearby Services"
                 android:textAllCaps="false"
                 android:textSize="19sp"
                 android:typeface="sans"
