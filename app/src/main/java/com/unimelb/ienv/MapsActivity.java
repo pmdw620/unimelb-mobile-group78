@@ -2,7 +2,6 @@ package com.unimelb.ienv;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -12,17 +11,15 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,11 +28,16 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private GoogleMap mMap;
+    private static GoogleMap mMap;
     private ArrayList<Service> services;
+    public static ArrayList<Service> availableServices;
+    private static final int MAX_NUMBER_CALCULATION_THREADS = 100;
+    public static ExecutorService threadPool = Executors.newFixedThreadPool(MAX_NUMBER_CALCULATION_THREADS);       // thread pool
 
 
     @Override
@@ -43,6 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         services = new ArrayList<>();
+        availableServices = new ArrayList<>();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -64,25 +67,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 Service service = new Service(name, type, lat, lnt);
                                 services.add(service);
                             }
-                            displayServices();
+                            markService();
                         }
                     }
                 });
     }
 
-    private void displayServices(){
-        for(Service service : services){
-            LatLng tmp = new LatLng(service.getLat(), service.getLnt());
-            if(service.getType().equals("restaurant")){
-                MarkerOptions marker = new MarkerOptions().position(tmp).title(service.getName());
-                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
-                mMap.addMarker(marker);
-            } else if(service.getType().equals("rubbishbin")){
-                MarkerOptions marker = new MarkerOptions().position(tmp).title(service.getName());
-                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_rubbishbin));
-                mMap.addMarker(marker);
-            }
+    private void markService(){
+        // get user's location
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
 
+        Location myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        double currLat = myLocation.getLatitude();
+        double currLnt = myLocation.getLongitude();
+        Log.d("Number of services", String.valueOf(services.size()));
+        for(Service service : services){
+            try{
+                Log.d("NOTICED", "New runnable generating");
+                Runnable distCalcRunnable = new DistanceCalculatorRunnable(currLat, currLnt, service);
+                runOnUiThread(distCalcRunnable);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public static void addMarker(Service service){
+        LatLng tmp = new LatLng(service.getLat(), service.getLnt());
+        Log.d("Service Marked", service.getName());
+        if(service.getType().equals("restaurant")){
+            MarkerOptions marker = new MarkerOptions().position(tmp).title(service.getName());
+            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
+            mMap.addMarker(marker);
+        } else if(service.getType().equals("rubbishbin")){
+            MarkerOptions marker = new MarkerOptions().position(tmp).title(service.getName());
+            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_rubbishbin));
+            mMap.addMarker(marker);
         }
     }
 
@@ -111,7 +136,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 != PackageManager.PERMISSION_GRANTED) {
             return;
         } else{
-            Toast.makeText(this, "granted", Toast.LENGTH_LONG).show();
         }
 
         mMap.setMyLocationEnabled(true);
