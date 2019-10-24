@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             db.update(TaskDBModel.TABLE_NAME, updatetask.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
                             TextView tv = findViewById(R.id.todaypoints);
                             tv.setText("0");
-                            if(weekday.contains("Wed")){
+                            if(weekday.contains("Mon")){
                                 firedb.collection("UserCollection").document(username).update("currWeekPoints",0);
                                 weekpoints = weekpoints-weekpoints;
                             }
