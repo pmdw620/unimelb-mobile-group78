@@ -39,6 +39,7 @@ public class ProfileFragment extends Fragment {
     private ImageView logoutBtn;
     private ImageView storeBtn;
     private ImageView mapBtn;
+    private ImageView itemBtn;
     private TextView displayName;
     private TextView my_score;
     private de.hdodenhof.circleimageview.CircleImageView avatar;
@@ -58,18 +59,22 @@ public class ProfileFragment extends Fragment {
         LinearLayout linearLayout1 = rootview.findViewById(R.id.linearLayout1);
         LinearLayout linearLayout2 = rootview.findViewById(R.id.linearLayout2);
         LinearLayout linearLayout3 = rootview.findViewById(R.id.linearLayout3);
+        LinearLayout linearLayout4 = rootview.findViewById(R.id.linearLayout4);
         ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) avatar.getLayoutParams();
-        lp.height = (int)(height/8);
+        lp.height = (int)(height/10);
         avatar.setLayoutParams(lp);
         lp = (ViewGroup.LayoutParams) linearLayout1.getLayoutParams();
-        lp.height = (int)(height/8);
+        lp.height = (int)(height/12);
         linearLayout1.setLayoutParams(lp);
         lp = (ViewGroup.LayoutParams) linearLayout2.getLayoutParams();
-        lp.height = height/8;
+        lp.height = (int)height/12;
         linearLayout2.setLayoutParams(lp);
         lp = (ViewGroup.LayoutParams) linearLayout3.getLayoutParams();
-        lp.height = height/8;
+        lp.height = (int)height/12;
         linearLayout3.setLayoutParams(lp);
+        lp = (ViewGroup.LayoutParams) linearLayout4.getLayoutParams();
+        lp.height = (int)height/12;
+        linearLayout4.setLayoutParams(lp);
         return rootview;
     }
 
@@ -79,6 +84,7 @@ public class ProfileFragment extends Fragment {
         logoutBtn = (ImageView) getView().findViewById(R.id.logoutBtn);
         storeBtn = (ImageView) getView().findViewById(R.id.storeBtn);
         mapBtn = (ImageView) getView().findViewById(R.id.mapBtn);
+        itemBtn = (ImageView)getView().findViewById(R.id.itemBtn) ;
         displayName = (TextView) getView().findViewById(R.id.displayName);
         avatar = getView().findViewById(R.id.avatar);
 
@@ -124,6 +130,13 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v){
                 Intent i = new Intent(getActivity(),ShopActivity.class);
                 startActivity(i);
+            }
+        });
+
+        itemBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+//               Intent i = new Intent(getActivity(),ShopActivity.class);
+//               startActivity(i);
             }
         });
 

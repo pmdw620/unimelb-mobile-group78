@@ -292,6 +292,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             isBind =  bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
             startService(intent); //绷定并且开启一个服务，绷定是为了方便数据交换，启动是为了当当前app不在活动页的时候，计步服务不会被关闭。需要保证当activity不为活跃状态是计步服务在后台能一直运行！
 
+
+
         }
     }
     private void updatefirebase (){

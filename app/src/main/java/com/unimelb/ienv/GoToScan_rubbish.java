@@ -21,6 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.os.Bundle;
+import android.util.LongSparseArray;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,58 +140,69 @@ public class GoToScan_rubbish extends AppCompatActivity {
             if (data != null) {
                 //返回的文本内容　
                 String content = data.getStringExtra(DECODED_CONTENT_KEY);
-                System.out.println(content);
-                final int value = Integer.parseInt(content);
-                SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                TaskDBModel task = new TaskDBModel();
-
-                Cursor cursor = db.rawQuery("select * from TaskCompleter ",
-                        null);
-                int id=1,dining=0,walk=0,quiz=0,rubbish = 0;
-//                db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-                while (cursor.moveToNext()) {
-                    id = Integer.parseInt(cursor.getString(0));
-                    rubbish = Integer.parseInt(cursor.getString(1));
-                    dining = Integer.parseInt(cursor.getString(2));
-                    walk = Integer.parseInt(cursor.getString(3));
-                    quiz = Integer.parseInt(cursor.getString(4));
+                if (!content.contains(" ")){
+                    Toast.makeText(getApplicationContext(),"Invalid QRcode!", Toast.LENGTH_LONG).show();
                 }
-                final int rubbish1 = rubbish;
-                task.setDining(dining);
-                task.setQuiz(quiz);
-                task.setWalk(walk);
-                task.setRubbish(Math.min(5,rubbish+value));
-                int curValue = (Math.min(5,rubbish1+value)-rubbish1);
-                Toast.makeText(this, "You have earned "+ curValue + " point(s)", Toast.LENGTH_SHORT).show();
-                db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
-                System.out.println("query--->" + id + "," + rubbish + "," + dining+","+walk+","+quiz);//输出数据
-                final String username=FirebaseAuth.getInstance().getCurrentUser().getUid();
-                firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Log.d("test", "DocumentSnapshot data: " + document.getData());
-                                Map data = document.getData();
-                                Long weekpoints = (Long)data.get("currWeekPoints")+(Math.min(5,rubbish1+value)-rubbish1);
-                                System.out.println(weekpoints);
-                                Long totalpoints = (Long)data.get("totalPoints")+(Math.min(5,rubbish1+value)-rubbish1);
-                                System.out.println(totalpoints);
-                                firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints);
-                                firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints);
-                            } else {
-                                Log.d("test", "No such document");
-                            }
-                        } else {
-                            Log.d("test", "get failed with ", task.getException());
-                        }
+                else {
+                    String results[] = content.split(" ");
+                    long timeStamps = Long.parseLong(results[0]);
+                    String points = results[1];
+                    long currentStamps = System.currentTimeMillis();
+                    long boundary = 1000*60*5;
+                    if ((currentStamps-timeStamps)>=boundary){
+                        Toast.makeText(getApplicationContext(),"Invalid QRcode!", Toast.LENGTH_LONG).show();
+                        return;
                     }
-                });
+                    final int value = Integer.parseInt(points);
+                    SQLiteOpenHelper dbHelper = new TaskDBOpener(this);
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    TaskDBModel task = new TaskDBModel();
 
-                //返回的BitMap图像
-                Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
+                    Cursor cursor = db.rawQuery("select * from TaskCompleter ",
+                            null);
+                    int id = 1, dining = 0, walk = 0, quiz = 0, rubbish = 0;
+//                db.update(TaskDBModel.TABLE_NAME, task.toContentValues(),"id = ?", new String[]{String.valueOf(id)});
+                    while (cursor.moveToNext()) {
+                        id = Integer.parseInt(cursor.getString(0));
+                        rubbish = Integer.parseInt(cursor.getString(1));
+                        dining = Integer.parseInt(cursor.getString(2));
+                        walk = Integer.parseInt(cursor.getString(3));
+                        quiz = Integer.parseInt(cursor.getString(4));
+                    }
+                    final int rubbish1 = rubbish;
+                    task.setDining(dining);
+                    task.setQuiz(quiz);
+                    task.setWalk(walk);
+                    task.setRubbish(Math.min(5, rubbish + value));
+                    int curValue = (Math.min(5, rubbish1 + value) - rubbish1);
+                    Toast.makeText(this, "You have earned " + curValue + " point(s)", Toast.LENGTH_SHORT).show();
+                    db.update(TaskDBModel.TABLE_NAME, task.toContentValues(), "id = ?", new String[]{String.valueOf(id)});
+                    System.out.println("query--->" + id + "," + rubbish + "," + dining + "," + walk + "," + quiz);//输出数据
+                    final String username = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    firedb.collection("UserCollection").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d("test", "DocumentSnapshot data: " + document.getData());
+                                    Map data = document.getData();
+                                    Long weekpoints = (Long) data.get("currWeekPoints") + (Math.min(5, rubbish1 + value) - rubbish1);
+                                    System.out.println(weekpoints);
+                                    Long totalpoints = (Long) data.get("totalPoints") + (Math.min(5, rubbish1 + value) - rubbish1);
+                                    System.out.println(totalpoints);
+                                    firedb.collection("UserCollection").document(username).update("currWeekPoints", weekpoints);
+                                    firedb.collection("UserCollection").document(username).update("totalPoints", totalpoints);
+                                } else {
+                                    Log.d("test", "No such document");
+                                }
+                            } else {
+                                Log.d("test", "get failed with ", task.getException());
+                            }
+                        }
+                    });
+
+                }
 
             }
         }
