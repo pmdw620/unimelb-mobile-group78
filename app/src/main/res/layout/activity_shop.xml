@@ -47,9 +47,10 @@
         android:layout_width="414dp"
         android:layout_height="57dp"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/shop"
-        android:scaleType="fitXY"/>
+        tools:src="@drawable/shop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

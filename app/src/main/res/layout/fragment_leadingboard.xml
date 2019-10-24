@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/leader8" />
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/mylayout"
         android:layout_width="331dp"
         android:layout_height="80dp"
@@ -44,7 +44,7 @@
 
         <TextView
             android:id="@+id/myuser"
-            android:layout_width="106dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
