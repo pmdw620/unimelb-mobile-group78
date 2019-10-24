@@ -18,10 +18,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -199,10 +203,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 firedb.collection("UserCollection").document(username).update("currWeekPoints",weekpoints+5);
                                 weekpoints = weekpoints+5;
                                 firedb.collection("UserCollection").document(username).update("totalPoints",totalpoints+5);
-                                Toast.makeText(getApplicationContext(), "Login "+lastLogin+" ! Earned extra 5 points", Toast.LENGTH_LONG).show();
+                                Toast toast = Toast.makeText(getApplicationContext(), "Login "+lastLogin+" Days ! Earned extra 5 points", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER,0,0);
+                                LinearLayout toastView = (LinearLayout) toast.getView();
+                                toastView.setGravity(Gravity.CENTER);
+                                toastView.setPadding(0,20,0,0);
+                                ImageView imageCodeProject = new ImageView(getApplicationContext());
+                                imageCodeProject.setImageResource(R.drawable.congrat);
+                                toastView.addView(imageCodeProject, 0);
+                                ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) imageCodeProject.getLayoutParams();
+                                lp.height = 125;
+                                lp.width=125;
+                                imageCodeProject.setLayoutParams(lp);
+
+                                toast.show();
                             }
                             else{
-                                Toast.makeText(getApplicationContext(), "Congrats for a new day! You have continued logged in for " + lastLogin + " day(s)！", Toast.LENGTH_LONG).show();
+                                Toast toast = Toast.makeText(getApplicationContext(), "Congrats for a new day! You have continued logged in for " + lastLogin + " day(s)！", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER,0,0);
+                                LinearLayout toastView = (LinearLayout) toast.getView();
+                                toastView.setGravity(Gravity.CENTER);
+                                toastView.setPadding(0,20,0,0);
+                                ImageView imageCodeProject = new ImageView(getApplicationContext());
+                                imageCodeProject.setImageResource(R.drawable.congrat);
+                                toastView.addView(imageCodeProject, 0);
+                                ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) imageCodeProject.getLayoutParams();
+                                lp.height = 125;
+                                lp.width=125;
+                                imageCodeProject.setLayoutParams(lp);
+
+                                toast.show();
+
                             }
                             Log.d("testtestestetst", weekpoints.toString());
                             TextView wp = findViewById(R.id.weekpoints);
