@@ -100,10 +100,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // UI Thread wait till all threads in threadpool executed.
         threadPool.shutdown();
+        while(!threadPool.isTerminated()){}
         markServices();
     }
 
     private void markServices(){
+        Log.d("TEST", "Mark Service starts now! Number of Nearby Services: " + nearbyServices.size());
         for(Map.Entry<String, Service> entry: nearbyServices.entrySet()){
             Service service = entry.getValue();
             addMarker(service);
