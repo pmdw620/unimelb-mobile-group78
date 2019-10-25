@@ -22,7 +22,7 @@ public class DistanceCalculatorRunnable implements Runnable {
     public void run() {
         double dist = distance(originLat, originLnt, service.getLat(), service.getLnt());
         if(dist <= 3){
-            MapsActivity.addMarker(service);
+            MapsActivity.nearbyServices.put(service.getName(),  service);
         }
         Log.d(String.valueOf(originLat), String.valueOf(originLnt));
         Log.d(service.getName(), String.valueOf(dist));

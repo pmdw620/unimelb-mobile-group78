@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.icu.util.TimeUnit;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -28,6 +29,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,9 +38,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static GoogleMap mMap;
     private ArrayList<Service> services;
-    public static ArrayList<Service> availableServices;
-    private static final int MAX_NUMBER_CALCULATION_THREADS = 100;
-    public static ExecutorService threadPool = Executors.newFixedThreadPool(MAX_NUMBER_CALCULATION_THREADS);       // thread pool
+    public static ConcurrentHashMap<String, Service> nearbyServices;
+    private final int MAX_DISTANCE_CALCULATION_THREAD = 100;
+    private ExecutorService threadPool = Executors.newFixedThreadPool(MAX_DISTANCE_CALCULATION_THREAD);
 
 
     @Override
@@ -45,7 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         services = new ArrayList<>();
-        availableServices = new ArrayList<>();
+        nearbyServices = new ConcurrentHashMap<>();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -67,13 +70,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 Service service = new Service(name, type, lat, lnt);
                                 services.add(service);
                             }
-                            markService();
+                            getNearbyServices();
                         }
                     }
                 });
     }
 
-    private void markService(){
+    private void getNearbyServices(){
         // get user's location
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -89,10 +92,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             try{
                 Log.d("NOTICED", "New runnable generating");
                 Runnable distCalcRunnable = new DistanceCalculatorRunnable(currLat, currLnt, service);
-                runOnUiThread(distCalcRunnable);
+                threadPool.execute(distCalcRunnable);
             } catch (Exception e){
                 e.printStackTrace();
             }
+        }
+
+        // UI Thread wait till all threads in threadpool executed.
+        threadPool.shutdown();
+        markServices();
+    }
+
+    private void markServices(){
+        for(Map.Entry<String, Service> entry: nearbyServices.entrySet()){
+            Service service = entry.getValue();
+            addMarker(service);
         }
     }
 
